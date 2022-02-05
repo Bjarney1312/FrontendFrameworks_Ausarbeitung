@@ -1,0 +1,59 @@
+body{
+  background: whitesmoke;
+}
+
+.reptile-cards{
+  display: inline-flex;
+  margin-top: 20px;
+}
+
+mat-card{
+   width: 400px;
+   margin: 10px;
+ }
+
+.reptiles-menu{
+  margin-left: 50px;
+  margin-right: 70px;
+}
+
+.reptile-buttons{
+  margin: 5px;
+}
+
+.mat-reptiNoteTheme{
+  background-color: darkolivegreen;
+  color: white;
+}
+
+.dashboard-header{
+  display: grid;
+  grid-template-areas:
+    "a b c d e";
+  grid-template-columns: 180px 30px auto 30px 300px;
+}
+
+.dashboard-header h2{
+  grid-area: a;
+  margin-top: 20px;
+  margin-left: 15px;
+  font-size: x-large;
+}
+
+.searchfield{
+  grid-area: e;
+  justify-self: end;
+  width: 300px;
+  margin-top: 20px;
+  padding-left: 50px;
+}
+
+.icon-search{
+  grid-area: d;
+  margin-top: 25px;
+}
+
+.add-button{
+  margin-top: 15px;
+}
+

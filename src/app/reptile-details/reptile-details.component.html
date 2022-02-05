@@ -1,0 +1,18 @@
+<div class="test" *ngIf="reptile">
+
+  <h2>{{reptile.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{reptile.id}}</div>
+  <div>
+    <label for="reptile-name">Name: </label>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Favorite food</mat-label>
+      <input matInput placeholder="Name" value="" id="reptile-name" [(ngModel)]="reptile.name">
+    </mat-form-field>
+  </div>
+
+  <button type="button" (click)="goBack()">go back</button>
+
+  <button type="button" (click)="save()">save</button>
+
+</div>

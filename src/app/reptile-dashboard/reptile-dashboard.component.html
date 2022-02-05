@@ -1,0 +1,43 @@
+<div class="reptiles-menu">
+
+  <div class="dashboard-header">
+    <h2>Meine Tiere</h2>
+    <button mat-mini-fab class="add-button" color="reptiNoteTheme" aria-label="Fast-Feed-Button">
+      <mat-icon>add</mat-icon>
+    </button>
+    <app-reptile-search class="searchfield"></app-reptile-search>
+    <mat-icon class="icon-search" matSuffix>search</mat-icon>
+  </div>
+
+
+  <div class="reptile-cards" *ngFor="let reptile of reptiles">
+    <mat-card class="test">
+
+      <mat-card-title-group>
+        <mat-card-title>{{reptile.name}}</mat-card-title>
+        <mat-card-subtitle>{{reptile.ordnung}} | {{reptile.art}}</mat-card-subtitle>
+        <img mat-card-md-image src="https://cdn.pixabay.com/photo/2015/05/29/21/50/heterodon-nasicus-789863_1280.jpg" alt="Photo of a Hognose">
+      </mat-card-title-group>
+
+      <mat-card-content>
+        <section>
+          <p>Geburtsdatum: {{reptile.geburtsdatum}}</p>
+          <p>Morph: {{reptile.morph}}</p>
+          <p>Letzte Fütterung: </p>
+        </section>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Fast-Feed-Button">
+          <mat-icon>restaurant</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
+

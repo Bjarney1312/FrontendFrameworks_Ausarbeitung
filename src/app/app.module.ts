@@ -14,12 +14,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ReptileDashboardComponent } from './reptile-dashboard/reptile-dashboard.component';
 import { ReptileDetailsComponent } from './reptile-details/reptile-details.component';
 import {FormsModule} from "@angular/forms";
 import { ReptileSearchComponent } from './reptile-search/reptile-search.component';
+import { DialogAddReptileComponent } from './dialog-add-reptile/dialog-add-reptile.component';
 
 
 
@@ -29,7 +31,8 @@ import { ReptileSearchComponent } from './reptile-search/reptile-search.componen
     LoginPageComponent,
     ReptileDashboardComponent,
     ReptileDetailsComponent,
-    ReptileSearchComponent
+    ReptileSearchComponent,
+    DialogAddReptileComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +54,7 @@ import { ReptileSearchComponent } from './reptile-search/reptile-search.componen
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
+    MatDialogModule,
 
   ],
   providers: [],

@@ -36,16 +36,17 @@ export class ReptileService {
   }
 
   /** PUT: update the hero on the server */
-  updateReptile(hero: Reptile): Observable<any> {
-    return this.http.put(this.reptileUrl, hero, this.httpOptions).pipe(
+  updateReptile(reptile: Reptile): Observable<any> {
+    return this.http.put(this.reptileUrl, reptile, this.httpOptions).pipe(
       // tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
   }
 
   /** POST: add a new hero to the server */
-  addReptile(hero: Reptile): Observable<Reptile> {
-    return this.http.post<Reptile>(this.reptileUrl, hero, this.httpOptions).pipe(
+  addReptile(reptile: Reptile): Observable<Reptile> {
+    console.log('TEST: Add Reptile wird ausgeführt' + reptile.name);
+    return this.http.post<Reptile>(this.reptileUrl, reptile, this.httpOptions).pipe(
       // tap((newHero: Reptile) => this.log(`added hero w/ id=${newHero.id}`)),
       catchError(this.handleError<Reptile>('addHero'))
     );

@@ -14,6 +14,7 @@ export class ReptileDashboardComponent implements OnInit {
 
   reptiles: Reptile[] = [];
   reptile!: Reptile;
+  lastid: number = 0;
 
   constructor(private reptileService: ReptileService, public dialog: MatDialog) {
   }
@@ -24,7 +25,11 @@ export class ReptileDashboardComponent implements OnInit {
 
   getReptiles(): void {
     this.reptileService.getReptiles()
-      .subscribe(reptiles => this.reptiles = reptiles);
+      .subscribe(reptiles => {
+        this.reptiles = reptiles;
+        this.lastid = reptiles.length;
+      });
+
   }
 
   add(reptile: Reptile): void {
@@ -39,24 +44,26 @@ export class ReptileDashboardComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddReptileComponent, {
-      width: '250px',
+      width: '300px',
       data: {
         reptile: {
           id: 0,
-          name: 'Hubert',
+          name: '',
           geburtsdatum: '',
           ordnung: '',
           art: '',
           morph: ''
-        }
+        },
       },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('TEST:' + result.name);
       this.reptile = result;
-      console.log('TEST this Reptile:' + this.reptile.name);
-      this.add(result);
+      this.reptile.id = this.lastid + 1;
+      console.log('Neues Tier mit ID: ' + result.id);
+      this.lastid = this.lastid+1;
+      this.add(this.reptile);
       this.getReptiles();
     });
   }

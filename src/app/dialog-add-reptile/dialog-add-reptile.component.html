@@ -1,43 +1,51 @@
 <script src="../reptile.ts"></script><h2 mat-dialog-title>Tier hinzufügen</h2>
 <mat-dialog-content class="mat-typography">
 
-  <form class="example-form" >
+  <form class="add-reptile-form">
 
     <p>
-      Test {{data.id}}
-    </p>
-
-    <p>
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input">
         <mat-label>Name</mat-label>
-        <input matInput name="name" id="reptile-name" [(ngModel)]="data.name">
+        <input matInput name="name" id="reptile-name"  [(ngModel)]="data.name" [formControl]="nameControl" required>
       </mat-form-field>
     </p>
 
     <p>
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
         <mat-label>Geburtsdatum</mat-label>
         <input matInput name="geburtsdatum" id="reptile-geburtsdatum" [(ngModel)]="data.geburtsdatum">
       </mat-form-field>
     </p>
 
+    <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+      <mat-label>Ordnung</mat-label>
+      <mat-select [formControl]="orderControl" required>
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let order of orders" [value]="order">
+          {{order}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="orderControl.hasError('required')">Bitte Tier zuordnen</mat-error>
+    </mat-form-field>
+
     <p>
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
         <mat-label>Art</mat-label>
-        <input matInput name="art" id="reptile-art" [(ngModel)]="data.art">
+        <input matInput name="art" id="reptile-art" [(ngModel)]="data.art" [formControl]="typeControl" required >
       </mat-form-field>
     </p>
 
     <p>
-      <mat-form-field appearance="legacy">
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
         <mat-label>Morph</mat-label>
-        <input matInput name="morph" id="reptile-morph" [(ngModel)]="data.morph">
+        <input matInput name="morph" id="reptile-morph" class="add-reptile-dialog-input" [(ngModel)]="data.morph" >
       </mat-form-field>
     </p>
   </form>
 
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+
+<mat-dialog-actions>
   <button mat-button mat-dialog-close>Abbrechen</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Hinzufügen</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="orderControl.invalid || typeControl.invalid || nameControl.invalid">Hinzufügen</button>
 </mat-dialog-actions>

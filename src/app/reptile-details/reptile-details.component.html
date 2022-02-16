@@ -1,18 +1,81 @@
 <div class="test" *ngIf="reptile">
 
-  <h2>{{reptile.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{reptile.id}}</div>
-  <div>
-    <label for="reptile-name">Name: </label>
+  <div class="reptile-details-card">
+    <mat-card class="details-card">
+      <mat-card-title-group>
+        <mat-card-title>{{reptile.name}}</mat-card-title>
+        <mat-card-subtitle>{{reptile.ordnung}} | {{reptile.art}}</mat-card-subtitle>
+        <img mat-card-md-image src="https://cdn.pixabay.com/photo/2015/05/29/21/50/heterodon-nasicus-789863_1280.jpg" alt="Photo of a Hognose">
+      </mat-card-title-group>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Favorite food</mat-label>
-      <input matInput placeholder="Name" value="" id="reptile-name" [(ngModel)]="reptile.name">
-    </mat-form-field>
+      <mat-card-content>
+        <section>
+          <p>Geburtsdatum: {{reptile.geburtsdatum}}</p>
+          <p>Morph: {{reptile.morph}}</p>
+          <p>Letzte Fütterung: </p>
+        </section>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
+          <mat-icon> textsms</mat-icon>
+        </button>
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
+          <mat-icon>swap_vert</mat-icon>
+        </button>
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Fast-Feed-Button">
+          <mat-icon> restaurant_menu</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 
-  <button type="button" (click)="goBack()">go back</button>
+  <div class="details-table-area">
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">restaurant_menu</mat-icon>
+          Fütterungen
+        </ng-template>
+        Content 1
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">swap_vert</mat-icon>
+          Gewicht
+        </ng-template>
+        Content 2
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon class="example-tab-icon">textsms</mat-icon>
+          Notizen
+        </ng-template>
+        Content 3
+      </mat-tab>
 
-  <button type="button" (click)="save()">save</button>
-
+    </mat-tab-group>
+  </div>
 </div>
+
+
+<!--<h2>{{reptile.name | uppercase}} Details</h2>-->
+<!--<div><span>id: </span>{{reptile.id}}</div>-->
+<!--<div>-->
+<!--  <label for="reptile-name">Name: </label>-->
+
+<!--  <mat-form-field class="example-full-width" appearance="fill">-->
+<!--    <mat-label>Favorite food</mat-label>-->
+<!--    <input matInput placeholder="Name" value="" id="reptile-name" [(ngModel)]="reptile.name">-->
+<!--  </mat-form-field>-->
+<!--</div>-->
+
+<!--<button type="button" (click)="goBack()">go back</button>-->
+
+<!--<button type="button" (click)="save()">save</button>-->

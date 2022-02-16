@@ -15,13 +15,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ReptileDashboardComponent } from './reptile-dashboard/reptile-dashboard.component';
 import { ReptileDetailsComponent } from './reptile-details/reptile-details.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ReptileSearchComponent } from './reptile-search/reptile-search.component';
 import { DialogAddReptileComponent } from './dialog-add-reptile/dialog-add-reptile.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -55,7 +57,9 @@ import { DialogAddReptileComponent } from './dialog-add-reptile/dialog-add-repti
     MatInputModule,
     MatToolbarModule,
     MatDialogModule,
-
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatTabsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

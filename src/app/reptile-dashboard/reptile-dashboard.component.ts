@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ReptileService } from '../reptile.service';
-import {Reptile} from "../reptile";
+import {Reptile} from "../data/reptile";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogAddReptileComponent} from "../dialog-add-reptile/dialog-add-reptile.component";
 
@@ -27,9 +27,8 @@ export class ReptileDashboardComponent implements OnInit {
     this.reptileService.getReptiles()
       .subscribe(reptiles => {
         this.reptiles = reptiles;
-        this.lastid = reptiles.length;
+        this.lastid = reptiles[reptiles.length-1].id;
       });
-
   }
 
   add(reptile: Reptile): void {
@@ -50,6 +49,7 @@ export class ReptileDashboardComponent implements OnInit {
           id: 0,
           name: '',
           geburtsdatum: '',
+          geschlecht: '',
           ordnung: '',
           art: '',
           morph: ''
@@ -58,13 +58,20 @@ export class ReptileDashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('TEST:' + result.name);
+      console.log('TEST:' + result.geschlecht);
       this.reptile = result;
       this.reptile.id = this.lastid + 1;
       console.log('Neues Tier mit ID: ' + result.id);
-      this.lastid = this.lastid+1;
+      this.genId();
       this.add(this.reptile);
       this.getReptiles();
     });
+  }
+
+  genId() : void {
+    this.reptileService.getReptiles().subscribe(result => {
+      this.lastid = result[result.length-1].id + 1;
+      console.log('Nochmal nen IDtestlol: ' + this.lastid);
+    })
   }
 }

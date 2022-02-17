@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import {ReptileService} from "../reptile.service";
-import {Reptile} from "../reptile";
+import {Reptile} from "../data/reptile";
 
 @Component({
   selector: 'app-reptile-details',

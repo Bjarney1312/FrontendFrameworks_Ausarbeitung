@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import {Reptile} from "./reptile";
+import {Reptile} from "./data/reptile";
 
 
 @Injectable({
@@ -13,6 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 1,
         name: 'Hubert',
         geburtsdatum: 'NZ20',
+        geschlecht: 'Männlich',
         ordnung: 'Schlange',
         art: 'Westliche Hakennasennatter',
         morph: 'Superconda het. Toxic'
@@ -21,6 +22,7 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 2,
         name: 'Tifa',
         geburtsdatum: 'NZ21',
+        geschlecht: 'Weiblich',
         ordnung: 'Schlange',
         art: 'Boa Constrictor Imperator',
         morph: 'IMG het. Leopard'
@@ -29,36 +31,150 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 3,
         name: 'Hektor',
         geburtsdatum: 'NZ21',
+        geschlecht: 'Männlich',
         ordnung: 'Schlange',
         art: 'Boa Constrictor Constrictor',
         morph: 'Classic'
       },
-      {
-        id: 4,
-        name: 'Hubert',
-        geburtsdatum: 'NZ20',
-        ordnung: 'Schlange',
-        art: 'Westliche Hakennasennatter',
-        morph: 'Superconda het. Toxic'
-      },
-      {
-        id: 5,
-        name: 'Tifa',
-        geburtsdatum: 'NZ21',
-        ordnung: 'Schlange',
-        art: 'Boa Constrictor Imperator',
-        morph: 'IMG het. Leopard'
-      },
-      {
-        id: 6,
-        name: 'Hektor',
-        geburtsdatum: 'NZ21',
-        ordnung: 'Schlange',
-        art: 'Boa Constrictor Constrictor',
-        morph: 'Classic'
-      }
     ];
-    return {reptiles};
+
+    const feedings = [
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki',
+        weight: 5.0,
+      },
+      {
+        id: 2,
+        reptileid: 1,
+        date: new Date().toLocaleDateString(),
+        type: 'Specki XL',
+        weight: 4.0,
+      },
+      {
+        id: 1,
+        reptileid: 2,
+        date: new Date().toLocaleDateString(),
+        type: 'Maus XXL',
+        weight: 35.0,
+      },
+
+    ];
+    return {reptiles, feedings};
   }
 
   // Overrides the genId method to ensure that a user always has an id.

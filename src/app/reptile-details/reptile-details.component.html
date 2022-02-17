@@ -2,17 +2,25 @@
 
   <div class="reptile-details-card">
     <mat-card class="details-card">
-      <mat-card-title-group>
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{reptile.name}}</mat-card-title>
         <mat-card-subtitle>{{reptile.ordnung}} | {{reptile.art}}</mat-card-subtitle>
-        <img mat-card-md-image src="https://cdn.pixabay.com/photo/2015/05/29/21/50/heterodon-nasicus-789863_1280.jpg" alt="Photo of a Hognose">
-      </mat-card-title-group>
+      </mat-card-header>
+
+      <img mat-card-image src="https://cdn.pixabay.com/photo/2015/05/29/21/50/heterodon-nasicus-789863_1280.jpg" alt="Photo of a Hognose">
 
       <mat-card-content>
-        <section>
-          <p>Geburtsdatum: {{reptile.geburtsdatum}}</p>
-          <p>Morph: {{reptile.morph}}</p>
-          <p>Letzte Fütterung: </p>
+        <section id="card-content-left">
+          <p><span class="card-content-subpoints">Geburtsdatum:</span> {{reptile.geburtsdatum}}</p>
+          <p><span class="card-content-subpoints">Geschlecht:</span> {{reptile.geschlecht}}</p>
+          <p><span class="card-content-subpoints">Morph:</span> {{reptile.morph}}</p>
+        </section>
+
+        <section id="card-section-right">
+          <p><span class="card-content-subpoints">Letzte Fütterung: </span></p>
+          <p><span class="card-content-subpoints">Gewicht: </span></p>
+          <p><span class="card-content-subpoints">Notiz: </span></p>
         </section>
       </mat-card-content>
 
@@ -43,7 +51,9 @@
           <mat-icon class="example-tab-icon">restaurant_menu</mat-icon>
           Fütterungen
         </ng-template>
-        Content 1
+
+       <app-feeding-table [reptile]="reptile"></app-feeding-table>
+
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>

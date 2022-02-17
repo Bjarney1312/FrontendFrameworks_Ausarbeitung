@@ -6,7 +6,7 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 
-import { Reptile } from '../reptile';
+import { Reptile } from '../data/reptile';
 import { ReptileService } from '../reptile.service';
 
 @Component({

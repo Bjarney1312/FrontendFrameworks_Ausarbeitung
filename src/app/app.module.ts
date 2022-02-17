@@ -16,6 +16,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ReptileDashboardComponent } from './reptile-dashboard/reptile-dashboard.component';
@@ -24,6 +26,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ReptileSearchComponent } from './reptile-search/reptile-search.component';
 import { DialogAddReptileComponent } from './dialog-add-reptile/dialog-add-reptile.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { FeedingTableComponent } from './feeding-table/feeding-table.component';
 
 
 
@@ -34,7 +37,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     ReptileDashboardComponent,
     ReptileDetailsComponent,
     ReptileSearchComponent,
-    DialogAddReptileComponent
+    DialogAddReptileComponent,
+    FeedingTableComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

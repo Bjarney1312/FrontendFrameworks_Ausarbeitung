@@ -22,7 +22,7 @@ mat-card {
   grid-area: details;
   border-right: solid 1px gray;
   margin-right: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .details-table-area{
@@ -32,3 +32,54 @@ mat-card {
 .details-card{
 
 }
+
+.mat-card-title{
+  margin-top: 20px;
+  margin-left: -35px;
+  font-size: xx-large;
+  padding-bottom: 20px;
+}
+
+.mat-card-subtitle{
+  margin-left: -35px;
+  font-size: large;
+
+}
+
+.mat-card-image{
+  width: 95%;
+  margin-left: 15px;
+  max-height: 800px;
+}
+
+.mat-card-content{
+  padding-top: 30px;
+  margin-left: 15px;
+  font-size: medium;
+  font-weight: lighter;
+
+  display: grid;
+  grid-template-areas:
+    "info dates";
+  grid-template-columns: 50% 50%;
+}
+
+.card-content-subpoints{
+  font-weight: bold;
+  color: dimgrey;
+}
+
+.card-content-left{
+  grid-area: info;
+}
+
+.card-content-right{
+  grid-area: dates;
+}
+
+mat-tab-group{
+  width: 95%;
+  margin: 20px;
+}
+
+

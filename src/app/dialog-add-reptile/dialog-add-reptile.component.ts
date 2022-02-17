@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Reptile} from "../reptile";
+import {Reptile} from "../data/reptile";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ReptileService} from "../reptile.service";
 import {FormControl, Validators} from "@angular/forms";
@@ -19,10 +19,15 @@ export class DialogAddReptileComponent implements OnInit {
     'Schlange',
     'Echse',
     'Krokodil',
-    'Scholdkröte',
+    'Schildkröte',
     'Amphibie',
     'Gliederfüßer',
     'Sonstiges'
+  ]
+  genders: String[] = [
+    'Männlich',
+    'Weiblich',
+    'Unbekannt'
   ]
 
   constructor(private reptileService: ReptileService,
@@ -32,6 +37,6 @@ export class DialogAddReptileComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.id = 0;
-    this.data.ordnung = 'Schlange';
+    this.data.geschlecht = 'Unbekannt';
   }
 }

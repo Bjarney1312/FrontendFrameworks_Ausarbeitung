@@ -27,7 +27,7 @@ export class ReptileService {
   }
 
   /** GET hero by id. Will 404 if id not found */
-  getReptile(id: number): Observable<Reptile> {
+  getReptile(id: string): Observable<Reptile> {
     const url = `${this.reptileUrl}/${id}`;
     return this.http.get<Reptile>(url).pipe(
       // tap(_ => this.log(`fetched hero id=${id}`)),
@@ -53,7 +53,7 @@ export class ReptileService {
   }
 
   /** DELETE: delete the hero from the server */
-  deleteReptile(id: number): Observable<Reptile> {
+  deleteReptile(id: string): Observable<Reptile> {
     const url = `${this.reptileUrl}/${id}`;
 
     return this.http.delete<Reptile>(url, this.httpOptions).pipe(

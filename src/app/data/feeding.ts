@@ -1,6 +1,5 @@
 export interface Feeding{
-  id: number;
-  reptileid: number;
+  id: string;
   date: Date;
   type: string;
   weight: number;

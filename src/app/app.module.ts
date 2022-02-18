@@ -27,6 +27,11 @@ import { ReptileSearchComponent } from './reptile-search/reptile-search.componen
 import { DialogAddReptileComponent } from './dialog-add-reptile/dialog-add-reptile.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FeedingTableComponent } from './feeding-table/feeding-table.component';
+import { DialogAddFeedingComponent } from './dialog-add-feeding/dialog-add-feeding.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from "@angular/material/core";
+
+
 
 
 
@@ -38,7 +43,8 @@ import { FeedingTableComponent } from './feeding-table/feeding-table.component';
     ReptileDetailsComponent,
     ReptileSearchComponent,
     DialogAddReptileComponent,
-    FeedingTableComponent
+    FeedingTableComponent,
+    DialogAddFeedingComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,6 @@ import { FeedingTableComponent } from './feeding-table/feeding-table.component';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
     ),
-
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -66,6 +71,8 @@ import { FeedingTableComponent } from './feeding-table/feeding-table.component';
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
 
   ],
   providers: [],

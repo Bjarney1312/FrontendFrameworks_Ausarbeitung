@@ -3,6 +3,11 @@ import { ReptileService } from '../reptile.service';
 import {Reptile} from "../data/reptile";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogAddReptileComponent} from "../dialog-add-reptile/dialog-add-reptile.component";
+import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feeding.component";
+import {Feeding} from "../data/feeding";
+import {v4 as uuidv4} from 'uuid';
+
+
 
 @Component({
   selector: 'app-reptile-dashboard',
@@ -14,20 +19,20 @@ export class ReptileDashboardComponent implements OnInit {
 
   reptiles: Reptile[] = [];
   reptile!: Reptile;
-  lastid: number = 0;
+  feeding!: Feeding;
 
   constructor(private reptileService: ReptileService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     this.getReptiles();
+
   }
 
   getReptiles(): void {
     this.reptileService.getReptiles()
       .subscribe(reptiles => {
         this.reptiles = reptiles;
-        this.lastid = reptiles[reptiles.length-1].id;
       });
   }
 
@@ -41,7 +46,7 @@ export class ReptileDashboardComponent implements OnInit {
       });
   }
 
-  openDialog(): void {
+  openAddReptileDialog(): void {
     const dialogRef = this.dialog.open(DialogAddReptileComponent, {
       width: '300px',
       data: {
@@ -58,20 +63,33 @@ export class ReptileDashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('TEST:' + result.geschlecht);
       this.reptile = result;
-      this.reptile.id = this.lastid + 1;
-      console.log('Neues Tier mit ID: ' + result.id);
-      this.genId();
       this.add(this.reptile);
       this.getReptiles();
     });
   }
 
-  genId() : void {
-    this.reptileService.getReptiles().subscribe(result => {
-      this.lastid = result[result.length-1].id + 1;
-      console.log('Nochmal nen IDtestlol: ' + this.lastid);
-    })
+  openAddFeedingDialog(reptileid : any): void {
+    const dialogRef = this.dialog.open(DialogAddFeedingComponent, {
+      width: '300px',
+      data: {
+        feeding: {
+          id: 0,
+          date: new Date(),
+          type: '',
+          weight: 0,
+        },
+        test: 1
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.reptileService.getReptile(reptileid)
+        .subscribe(reptile => {
+          reptile.feedings.push(Object.assign({}, result))
+          this.reptileService.updateReptile(reptile).subscribe();
+        })
+    });
   }
+
 }

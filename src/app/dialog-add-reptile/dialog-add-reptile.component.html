@@ -55,6 +55,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Abbrechen</button>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="orderControl.invalid || typeControl.invalid || nameControl.invalid">Hinzufügen</button>
 </mat-dialog-actions>

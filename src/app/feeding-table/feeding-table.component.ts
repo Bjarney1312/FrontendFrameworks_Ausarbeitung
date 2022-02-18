@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, ViewChild, OnInit, Input} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {Feeding} from "../data/feeding";
-import {FeedingService} from "../feeding.service";
 import {Reptile} from "../data/reptile";
 
 @Component({
@@ -10,28 +9,27 @@ import {Reptile} from "../data/reptile";
   templateUrl: './feeding-table.component.html',
   styleUrls: ['./feeding-table.component.css']
 })
-export class FeedingTableComponent implements OnInit {
+export class FeedingTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() reptile!: Reptile;
-  feedings: Feeding[] = [];
 
   displayedColumns: string[] = ['date', 'type', 'weight'];
-  dataSource = new MatTableDataSource<Feeding>(this.feedings);
+  dataSource!:MatTableDataSource<Feeding>
 
-  constructor(private feedingService: FeedingService) { }
+  constructor() { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.getFeedings(this.reptile.id);
+    this.dataSource = new MatTableDataSource<Feeding>(this.reptile.feedings);
+    this.dataSource.paginator = this.paginator;
   }
-
-  getFeedings(reptileid: number): void {
-    this.feedingService.getFeedingsByReptile(reptileid)
-      .subscribe(feedings => {
-        this.feedings = feedings;
-        this.dataSource = new MatTableDataSource<Feeding>(feedings);
-        this.dataSource.paginator = this.paginator;
-      });
+  ngAfterViewInit() {
+    // this.dataSource = new MatTableDataSource<Feeding>(this.reptile.feedings);
+    // this.dataSource.paginator = this.paginator;
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    // this.dataSource = new MatTableDataSource<Feeding>(this.reptile.feedings);
+    // this.dataSource.paginator = this.paginator;
   }
 }

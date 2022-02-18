@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Reptile} from "../data/reptile";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ReptileService} from "../reptile.service";
 import {FormControl, Validators} from "@angular/forms";
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-dialog-add-reptile',
@@ -30,13 +30,17 @@ export class DialogAddReptileComponent implements OnInit {
     'Unbekannt'
   ]
 
-  constructor(private reptileService: ReptileService,
+  constructor(
     public dialogRef: MatDialogRef<DialogAddReptileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Reptile,
   ) {}
 
   ngOnInit(): void {
-    this.data.id = 0;
+    this.data.id = uuidv4();
     this.data.geschlecht = 'Unbekannt';
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

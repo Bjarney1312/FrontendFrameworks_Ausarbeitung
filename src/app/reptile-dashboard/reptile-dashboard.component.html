@@ -2,7 +2,7 @@
 
   <div class="dashboard-header">
     <h2>Meine Tiere</h2>
-    <button mat-mini-fab class="add-button" color="reptiNoteTheme" aria-label="Add-Reptile-Button" (click)="openDialog()" >
+    <button mat-mini-fab class="add-button" color="reptiNoteTheme" aria-label="Add-Reptile-Button" (click)="openAddReptileDialog()" >
       <mat-icon>add</mat-icon>
     </button>
     <app-reptile-search class="searchfield"></app-reptile-search>
@@ -32,7 +32,7 @@
         <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
           <mat-icon>search</mat-icon>
         </button>
-        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Fast-Feed-Button">
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Fast-Feed-Button" (click)="openAddFeedingDialog(reptile.id)">
           <mat-icon>restaurant</mat-icon>
         </button>
       </mat-card-actions>

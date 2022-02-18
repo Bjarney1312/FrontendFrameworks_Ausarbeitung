@@ -6,6 +6,7 @@ table {
 
 mat-paginator{
   width: 95%;
+  margin-left: 20px;
 }
 
 

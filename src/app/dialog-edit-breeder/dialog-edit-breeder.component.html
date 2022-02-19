@@ -1,0 +1,75 @@
+<script src="../data/reptile.ts"></script><h2 mat-dialog-title>Züchter hinzufügen</h2>
+<mat-dialog-content class="mat-typography">
+
+  <form class="add-reptile-form">
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+        <mat-label>Vorname</mat-label>
+        <input matInput name="company" id="breeder-company" [(ngModel)]="data.companyName">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+        <mat-label>Vorname</mat-label>
+        <input matInput name="firstname" id="breeder-firstname" [(ngModel)]="data.firstName">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+        <mat-label>Nachname</mat-label>
+        <input matInput name="lastname" id="breeder-lastname" [(ngModel)]="data.lastName">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+        <mat-label>Straße</mat-label>
+        <input matInput name="street" id="breeder-street" [(ngModel)]="data.street">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+        <mat-label>Postleitzahl</mat-label>
+        <input matInput name="postal" id="breeder-postal" [(ngModel)]="data.postal">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+        <mat-label>Ort</mat-label>
+        <input matInput name="place" id="breeder-place" [(ngModel)]="data.place">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+        <mat-label>Land</mat-label>
+        <input matInput name="country" id="breeder-country" [(ngModel)]="data.country">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+        <mat-label>Email</mat-label>
+        <input matInput name="email" id="breeder-email" [(ngModel)]="data.email">
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+        <mat-label>Telefon</mat-label>
+        <input matInput name="phone" id="breeder-phone" [(ngModel)]="data.phone">
+      </mat-form-field>
+    </p>
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Hinzufügen</button>
+</mat-dialog-actions>

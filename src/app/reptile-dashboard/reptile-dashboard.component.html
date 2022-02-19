@@ -24,7 +24,10 @@
           <p>Geburtsdatum: {{reptile.geburtsdatum}}</p>
           <p>Geschlecht: {{reptile.geschlecht}}</p>
           <p>Morph: {{reptile.morph}}</p>
-          <p>Letzte Fütterung: </p>
+          <p>Züchter: {{reptile.breeder.companyName !== ''? reptile.breeder.companyName + ': ' : ''}}
+            {{reptile.breeder.firstName}} {{reptile.breeder.lastName}}</p>
+          <p>Letzte Fütterung: {{reptile.feedings[reptile.feedings.length-1]? reptile.feedings[reptile.feedings.length-1].date : '-'}}</p>
+
         </section>
       </mat-card-content>
 

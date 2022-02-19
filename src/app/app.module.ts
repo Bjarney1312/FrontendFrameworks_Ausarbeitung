@@ -43,6 +43,10 @@ import { DialogAddWeightComponent } from './dialog-add-weight/dialog-add-weight.
 import { DialogAddNoteComponent } from './dialog-add-note/dialog-add-note.component';
 import { DialogEditReptileComponent } from './dialog-edit-reptile/dialog-edit-reptile.component';
 import { DialogDeleteReptileComponent } from './dialog-delete-reptile/dialog-delete-reptile.component';
+import { BreederDashboardComponent } from './breeder-dashboard/breeder-dashboard.component';
+import { DialogAddBreederComponent } from './dialog-add-breeder/dialog-add-breeder.component';
+import { DialogEditBreederComponent } from './dialog-edit-breeder/dialog-edit-breeder.component';
+import { DialogDeleteBreederComponent } from './dialog-delete-breeder/dialog-delete-breeder.component';
 
 
 
@@ -62,7 +66,11 @@ import { DialogDeleteReptileComponent } from './dialog-delete-reptile/dialog-del
     DialogAddWeightComponent,
     DialogAddNoteComponent,
     DialogEditReptileComponent,
-    DialogDeleteReptileComponent
+    DialogDeleteReptileComponent,
+    BreederDashboardComponent,
+    DialogAddBreederComponent,
+    DialogEditBreederComponent,
+    DialogDeleteBreederComponent
   ],
   imports: [
     BrowserModule,

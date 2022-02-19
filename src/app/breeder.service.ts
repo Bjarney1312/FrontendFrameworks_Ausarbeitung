@@ -1,91 +1,79 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Feeding} from "./data/feeding";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Reptile} from "./data/reptile";
+import {Breeder} from "./data/breeder";
 
 @Injectable({
   providedIn: 'root'
 })
-export class FeedingService {
+export class BreederService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  private feedingUrl = 'api/feedings';  // URL to web api
+  private breederUrl = 'api/breeders';  // URL to web api
 
   constructor(private http: HttpClient,) { }
 
   /** GET heroes from the server */
-  getFeedings(): Observable<Feeding[]> {
-    return this.http.get<Feeding[]>(this.feedingUrl)
+  getBreeders(): Observable<Breeder[]> {
+    return this.http.get<Breeder[]>(this.breederUrl)
       .pipe(
         // tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<Feeding[]>('getFeedings', []))
+        catchError(this.handleError<Breeder[]>('getHeroes', []))
       );
   }
 
   /** GET hero by id. Will 404 if id not found */
-  getFeeding(id: number): Observable<Feeding> {
-    const url = `${this.feedingUrl}/${id}`;
-    return this.http.get<Feeding>(url).pipe(
+  getBreeder(id: string): Observable<Breeder> {
+    const url = `${this.breederUrl}/${id}`;
+    return this.http.get<Breeder>(url).pipe(
       // tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Feeding>(`getFeeding id=${id}`))
-    );
-  }
-
-  getFeedingsByReptile(reptileid: number): Observable<Feeding[]> {
-    const url = `${this.feedingUrl}`;
-
-    let params = new HttpParams();
-    params = params.append('reptileid', 1);
-
-    return this.http.get<Feeding[]>(url, {params: params } )
-      .pipe(
-      // tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Feeding[]>(`getFeedingsByReptile id=${reptileid}`))
+      catchError(this.handleError<Breeder>(`getHero id=${id}`))
     );
   }
 
   /** PUT: update the hero on the server */
-  updateFeeding(feeding: Feeding): Observable<any> {
-    return this.http.put(this.feedingUrl, feeding, this.httpOptions).pipe(
+  updateBreeder(breeder: Breeder): Observable<any> {
+    return this.http.put(this.breederUrl, breeder, this.httpOptions).pipe(
       // tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateFeeding'))
+      catchError(this.handleError<any>('updateHero'))
     );
   }
 
   /** POST: add a new hero to the server */
-  addFeeding(feeding: Feeding): Observable<Feeding> {
-    console.log('TEST: Add Feeding wird ausgeführt' + feeding.type);
-    return this.http.post<Feeding>(this.feedingUrl, feeding, this.httpOptions).pipe(
+  addBreeder(breeder: Breeder): Observable<Breeder> {
+    console.log('TEST: Add Reptile wird ausgeführt' + breeder.firstName);
+    return this.http.post<Breeder>(this.breederUrl, breeder, this.httpOptions).pipe(
       // tap((newHero: Reptile) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<Feeding>('addFeeding'))
+      catchError(this.handleError<Breeder>('addHero'))
     );
   }
 
   /** DELETE: delete the hero from the server */
-  deleteFeeding(id: number): Observable<Feeding> {
-    const url = `${this.feedingUrl}/${id}`;
+  deleteBreeder(id: string): Observable<Breeder> {
+    const url = `${this.breederUrl}/${id}`;
 
-    return this.http.delete<Feeding>(url, this.httpOptions).pipe(
+    return this.http.delete<Breeder>(url, this.httpOptions).pipe(
       // tap(_ => this.log(`deleted hero id=${id}`)),
-      catchError(this.handleError<Feeding>('deleteFeeding'))
+      catchError(this.handleError<Breeder>('deleteHero'))
     );
   }
 
   /* GET heroes whose name contains search term */
-  searchReptiles(term: string): Observable<Feeding[]> {
+  searchBreeder(term: string): Observable<Breeder[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Feeding[]>(`${this.feedingUrl}/?name=${term}`).pipe(
+    return this.http.get<Breeder[]>(`${this.breederUrl}/?lastname=${term}`).pipe(
       // tap(x => x.length ?
       //   this.log(`found heroes matching "${term}"`) :
       //   this.log(`no heroes matching "${term}"`)),
-      catchError(this.handleError<Feeding[]>('searchHeroes', []))
+      catchError(this.handleError<Breeder[]>('searchHeroes', []))
     );
   }
 

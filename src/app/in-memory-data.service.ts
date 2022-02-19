@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import {Reptile} from "./data/reptile";
 import {Feeding} from "./data/feeding";
-import {v4 as uuidv4} from 'uuid';
 import {Weight} from "./data/weight";
 import {Note} from "./data/note";
+import {Breeder} from "./data/breeder";
 
 
 @Injectable({
@@ -12,6 +12,33 @@ import {Note} from "./data/note";
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
+    const breeders: Breeder[] = [
+      {
+        id: '0',
+        companyName: '',
+        firstName: 'Unbekannt',
+        lastName: '',
+        street: '',
+        postal: '',
+        place: '',
+        country: '',
+        email: '',
+        phone: ''
+      },
+      {
+        id: '1',
+        companyName: 'Reptifit',
+        firstName: 'Wilco',
+        lastName: 'van Ee',
+        street: '',
+        postal: '',
+        place: 'Apeldoorn',
+        country: 'Niederlande',
+        email: 'info@reptifit.nl',
+        phone: ''
+      },
+     ];
+
     const reptiles: Reptile[] = [
       {
         id: '1',
@@ -24,7 +51,9 @@ export class InMemoryDataService implements InMemoryDbService {
         feedings: [],
         weight: [],
         notes: [],
+        breeder: breeders[1],
       },
+
       {
         id: '2',
         name: 'Tifa',
@@ -36,6 +65,7 @@ export class InMemoryDataService implements InMemoryDbService {
         feedings: [],
         weight: [],
         notes: [],
+        breeder: breeders[0]
       },
       {
         id: '3',
@@ -48,6 +78,7 @@ export class InMemoryDataService implements InMemoryDbService {
         feedings: [],
         weight: [],
         notes: [],
+        breeder: breeders[0]
       },
     ];
 
@@ -100,15 +131,6 @@ export class InMemoryDataService implements InMemoryDbService {
 
     reptiles[0].notes.push(notes[0]);
     reptiles[0].notes.push(notes[1]);
-    return {reptiles};
+    return {reptiles, breeders};
   }
-
-  // Overrides the genId method to ensure that a user always has an id.
-  // If the users array is empty,
-  // the method below returns the initial number (11).
-  // if the users array is not empty, the method below returns the highest
-  // user id + 1.
-  // genId(reptiles: Reptile[]): number {
-  //   return reptiles.length > 0 ? Math.max(...reptiles.map(reptile => reptile.id)) + 1 : 1;
-  // }
 }

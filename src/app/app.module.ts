@@ -32,6 +32,12 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
 
 
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MY_DATE_FORMATS } from './dialog-add-feeding/dialog-add-feeding.component';
+import { DatePipe } from '@angular/common';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+
 
 
 
@@ -73,9 +79,12 @@ import {MatNativeDateModule} from "@angular/material/core";
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
+    MomentDateModule,
+    MatCheckboxModule,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

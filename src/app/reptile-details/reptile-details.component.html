@@ -18,7 +18,7 @@
         </section>
 
         <section id="card-section-right">
-          <p><span class="card-content-subpoints">Letzte Fütterung: </span></p>
+          <p><span class="card-content-subpoints">Letzte Fütterung:</span> {{reptile.feedings[reptile.feedings.length-1]? reptile.feedings[reptile.feedings.length-1].date : '-'}}</p>
           <p><span class="card-content-subpoints">Gewicht: </span></p>
           <p><span class="card-content-subpoints">Notiz: </span></p>
         </section>
@@ -27,18 +27,6 @@
       <mat-card-actions align="end">
         <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
           <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
-          <mat-icon> textsms</mat-icon>
-        </button>
-        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
-          <mat-icon>swap_vert</mat-icon>
-        </button>
-        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Fast-Feed-Button" (click)="openAddFeedingDialog(reptile.id)">
-          <mat-icon> restaurant_menu</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>

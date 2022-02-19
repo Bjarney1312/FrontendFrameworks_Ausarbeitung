@@ -43,26 +43,4 @@ export class ReptileDetailsComponent implements OnInit {
         .subscribe(() => this.goBack());
     }
   }
-
-  openAddFeedingDialog(reptileid : any): void {
-    const dialogRef = this.dialog.open(DialogAddFeedingComponent, {
-      width: '300px',
-      data: {
-        feeding: {
-          id: 0,
-          date: new Date(),
-          type: '',
-          weight: 0,
-        },
-        test: 1
-      },
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.reptileService.getReptile(reptileid)
-        .subscribe(reptile => {
-          reptile.feedings.push(Object.assign({}, result))
-          this.reptileService.updateReptile(reptile).subscribe();
-        })
-    });
-  }
 }

@@ -46,13 +46,13 @@ export class InMemoryDataService implements InMemoryDbService {
     const feedings: Feeding[] = [
       {
         id: uuidv4(),
-        date: new Date(),
+        date: new Date().toLocaleDateString(),
         type: 'Specki',
         weight: 5.0,
       },
       {
         id: uuidv4(),
-        date: new Date(),
+        date: new Date().toLocaleDateString(),
         type: 'Specki XL',
         weight: 4.0,
       }

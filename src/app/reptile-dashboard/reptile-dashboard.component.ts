@@ -5,9 +5,6 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogAddReptileComponent} from "../dialog-add-reptile/dialog-add-reptile.component";
 import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feeding.component";
 import {Feeding} from "../data/feeding";
-import {v4 as uuidv4} from 'uuid';
-
-
 
 @Component({
   selector: 'app-reptile-dashboard',
@@ -59,13 +56,15 @@ export class ReptileDashboardComponent implements OnInit {
           art: '',
           morph: ''
         },
-      },
+      }, disableClose:true
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.reptile = result;
-      this.add(this.reptile);
-      this.getReptiles();
+      if(result !== undefined){
+        this.reptile = result;
+        this.add(this.reptile);
+        this.getReptiles();
+      }
     });
   }
 
@@ -79,17 +78,31 @@ export class ReptileDashboardComponent implements OnInit {
           type: '',
           weight: 0,
         },
-        test: 1
-      },
+      }, disableClose:true
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      this.reptileService.getReptile(reptileid)
-        .subscribe(reptile => {
-          reptile.feedings.push(Object.assign({}, result))
-          this.reptileService.updateReptile(reptile).subscribe();
-        })
+      if(result !== undefined){
+        if(result.date === undefined){
+          result.date = new Date().toLocaleDateString();
+        }
+        else{
+          result.date = result.date.toDate().toLocaleDateString()
+        }
+        if(result.type === undefined){
+          result.type = '-';
+        }
+
+        if(result.weight === undefined){
+          result.weight = 0.0;
+        }
+        this.reptileService.getReptile(reptileid)
+          .subscribe(reptile => {
+            reptile.feedings.push(Object.assign({}, result))
+            this.reptileService.updateReptile(reptile).subscribe();
+          })
+      }
     });
   }
+
 
 }

@@ -1,6 +1,6 @@
 export interface Feeding{
   id: string;
-  date: Date;
+  date: string;
   type: string;
   weight: number;
 }

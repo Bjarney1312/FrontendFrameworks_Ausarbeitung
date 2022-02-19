@@ -37,3 +37,8 @@
   cursor:pointer;
   font-size: 1em;
 }
+
+.mat-reptiNoteTheme{
+  background-color: darkolivegreen;
+  color: white;
+}

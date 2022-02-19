@@ -6,7 +6,9 @@ import {ReptileDetailsComponent} from "./reptile-details/reptile-details.compone
 const routes: Routes = [
   { path: 'dashboard', component: ReptileDashboardComponent },
   { path: 'detail/:id', component: ReptileDetailsComponent },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  // { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', component: ReptileDashboardComponent},
+
 
 ];
 

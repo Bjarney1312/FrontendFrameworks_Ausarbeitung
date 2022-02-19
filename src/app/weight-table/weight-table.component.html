@@ -1,11 +1,11 @@
 <div class="mat-elevation-z8" *ngIf="reptile">
 
-  <button mat-raised-button (click)="openAddFeedingDialog(reptile.id)" class="add-feeding-button" color="reptiNoteTheme">
-    <mat-icon> add </mat-icon>  Fütterung hinzufügen
+  <button mat-raised-button (click)="openAddWeightDialog(reptile.id)" class="weight-button" color="reptiNoteTheme">
+    <mat-icon> add </mat-icon>  Gewicht hinzufügen
   </button>
 
-  <button mat-raised-button (click)="deleteFeeding(reptile.id)" class="add-feeding-button" color="reptiNoteTheme">
-    <mat-icon> remove </mat-icon>  Fütterung entfernen
+  <button mat-raised-button (click)="deleteWeight(reptile.id)" class="weight-button" color="reptiNoteTheme">
+    <mat-icon> remove </mat-icon>  Gewicht entfernen
   </button>
 
   <table #myTable mat-table [dataSource]="dataSource">
@@ -30,11 +30,6 @@
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef> Datum </th>
       <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Futtertyp </th>
-      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
     </ng-container>
 
     <ng-container matColumnDef="weight">

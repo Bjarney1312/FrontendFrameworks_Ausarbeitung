@@ -5,6 +5,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogAddReptileComponent} from "../dialog-add-reptile/dialog-add-reptile.component";
 import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feeding.component";
 import {Feeding} from "../data/feeding";
+import {DialogAddWeightComponent} from "../dialog-add-weight/dialog-add-weight.component";
+import {DialogAddNoteComponent} from "../dialog-add-note/dialog-add-note.component";
 
 @Component({
   selector: 'app-reptile-dashboard',
@@ -46,17 +48,7 @@ export class ReptileDashboardComponent implements OnInit {
   openAddReptileDialog(): void {
     const dialogRef = this.dialog.open(DialogAddReptileComponent, {
       width: '300px',
-      data: {
-        reptile: {
-          id: 0,
-          name: '',
-          geburtsdatum: '',
-          geschlecht: '',
-          ordnung: '',
-          art: '',
-          morph: ''
-        },
-      }, disableClose:true
+      data: {reptile: {}}, disableClose:true
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -71,14 +63,7 @@ export class ReptileDashboardComponent implements OnInit {
   openAddFeedingDialog(reptileid : any): void {
     const dialogRef = this.dialog.open(DialogAddFeedingComponent, {
       width: '300px',
-      data: {
-        feeding: {
-          id: 0,
-          date: new Date(),
-          type: '',
-          weight: 0,
-        },
-      }, disableClose:true
+      data: {feeding: {}}, disableClose:true
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
@@ -91,13 +76,62 @@ export class ReptileDashboardComponent implements OnInit {
         if(result.type === undefined){
           result.type = '-';
         }
-
         if(result.weight === undefined){
           result.weight = 0.0;
         }
         this.reptileService.getReptile(reptileid)
           .subscribe(reptile => {
             reptile.feedings.push(Object.assign({}, result))
+            this.reptileService.updateReptile(reptile).subscribe();
+          })
+      }
+    });
+  }
+
+  openAddWeightDialog(reptileid : any): void {
+    const dialogRef = this.dialog.open(DialogAddWeightComponent, {
+      width: '300px',
+      data: {weight: {}}, disableClose:true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined){
+        if(result.date === undefined){
+          result.date = new Date().toLocaleDateString();
+        }
+        else{
+          result.date = result.date.toDate().toLocaleDateString()
+        }
+        if(result.weight === undefined){
+          result.weight = 0.0;
+        }
+        this.reptileService.getReptile(reptileid)
+          .subscribe(reptile => {
+            reptile.weight.push(Object.assign({}, result))
+            this.reptileService.updateReptile(reptile).subscribe();
+          })
+      }
+    });
+  }
+
+  openAddNoteDialog(reptileid : any): void {
+    const dialogRef = this.dialog.open(DialogAddNoteComponent, {
+      width: '300px',
+      data: {weight: {}}, disableClose:true
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined){
+        if(result.date === undefined){
+          result.date = new Date().toLocaleDateString();
+        }
+        else{
+          result.date = result.date.toDate().toLocaleDateString()
+        }
+        if(result.note === undefined){
+          result.note = 'Kein Eintrag';
+        }
+        this.reptileService.getReptile(reptileid)
+          .subscribe(reptile => {
+            reptile.notes.push(Object.assign({}, result))
             this.reptileService.updateReptile(reptile).subscribe();
           })
       }

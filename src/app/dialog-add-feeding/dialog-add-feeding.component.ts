@@ -4,21 +4,6 @@ import {Feeding} from "../data/feeding";
 import {v4 as uuidv4} from 'uuid';
 import {FormControl, Validators} from "@angular/forms";
 
-export const MY_DATE_FORMATS = {
-  parse: {
-    dateInput: 'DD-MM-YYYY',
-  },
-  display: {
-    dateInput: 'DD.MM.YYYY',
-    monthYearLabel: 'MMMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
-  },
-};
-
-
-
-
 @Component({
   selector: 'app-dialog-add-feeding',
   templateUrl: './dialog-add-feeding.component.html',

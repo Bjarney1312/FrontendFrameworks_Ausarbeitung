@@ -34,9 +34,15 @@ import {MatNativeDateModule} from "@angular/material/core";
 
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { MY_DATE_FORMATS } from './dialog-add-feeding/dialog-add-feeding.component';
+import { MY_DATE_FORMATS } from './data/dateFormats';
 import { DatePipe } from '@angular/common';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { WeightTableComponent } from './weight-table/weight-table.component';
+import { NoteTableComponent } from './note-table/note-table.component';
+import { DialogAddWeightComponent } from './dialog-add-weight/dialog-add-weight.component';
+import { DialogAddNoteComponent } from './dialog-add-note/dialog-add-note.component';
+import { DialogEditReptileComponent } from './dialog-edit-reptile/dialog-edit-reptile.component';
+import { DialogDeleteReptileComponent } from './dialog-delete-reptile/dialog-delete-reptile.component';
 
 
 
@@ -50,7 +56,13 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     ReptileSearchComponent,
     DialogAddReptileComponent,
     FeedingTableComponent,
-    DialogAddFeedingComponent
+    DialogAddFeedingComponent,
+    WeightTableComponent,
+    NoteTableComponent,
+    DialogAddWeightComponent,
+    DialogAddNoteComponent,
+    DialogEditReptileComponent,
+    DialogDeleteReptileComponent
   ],
   imports: [
     BrowserModule,

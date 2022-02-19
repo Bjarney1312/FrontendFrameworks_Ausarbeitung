@@ -1,0 +1,11 @@
+<script src="../data/reptile.ts"></script><h2 mat-dialog-title>Tier entfernen</h2>
+<mat-dialog-content class="mat-typography">
+
+    <p>Möchtest du dieses tier wirklich entfernen?</p>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
+  <button mat-button [mat-dialog-close]="data" color="warn" cdkFocusInitial>Entfernen</button>
+</mat-dialog-actions>

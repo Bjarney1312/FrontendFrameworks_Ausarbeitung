@@ -1,49 +1,41 @@
-import {Component, ViewChild, OnInit, Input} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
-import {Feeding} from "../data/feeding";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Reptile} from "../data/reptile";
-import {ReptileService} from "../reptile.service";
-import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feeding.component";
-import {MatDialog} from "@angular/material/dialog";
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+import {Feeding} from "../data/feeding";
 import {SelectionModel} from "@angular/cdk/collections";
-
+import {Weight} from "../data/weight";
+import {MatDialog} from "@angular/material/dialog";
+import {ReptileService} from "../reptile.service";
+import {MatPaginator} from "@angular/material/paginator";
+import {DialogAddWeightComponent} from "../dialog-add-weight/dialog-add-weight.component";
 
 @Component({
-  selector: 'app-feeding-table',
-  templateUrl: './feeding-table.component.html',
-  styleUrls: ['./feeding-table.component.css']
+  selector: 'app-weight-table',
+  templateUrl: './weight-table.component.html',
+  styleUrls: ['./weight-table.component.css']
 })
-export class FeedingTableComponent implements OnInit {
+export class WeightTableComponent implements OnInit {
 
   @Input() reptile!: Reptile;
-  @ViewChild('myTable') myTable!: MatTable<Feeding>;
+  @ViewChild('myTable') myTable!: MatTable<Weight>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: any[] = ['select', 'date', 'type', 'weight'];
-  dataSource!:MatTableDataSource<Feeding>
+  displayedColumns: any[] = ['select', 'date', 'weight'];
+  dataSource!:MatTableDataSource<Weight>
 
-  selection = new SelectionModel<Feeding>(true, []);
+  selection = new SelectionModel<Weight>(true, []);
 
   constructor(public dialog: MatDialog, private reptileService: ReptileService) { }
 
-
-
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Feeding>(this.reptile.feedings);
+    this.dataSource = new MatTableDataSource<Weight>(this.reptile.weight);
     this.dataSource.paginator = this.paginator;
   }
 
-  openAddFeedingDialog(reptileid : any): void {
-    const dialogRef = this.dialog.open(DialogAddFeedingComponent, {
+  openAddWeightDialog(reptileid : any): void {
+    const dialogRef = this.dialog.open(DialogAddWeightComponent, {
       width: '300px',
-      data: {
-        feeding: {
-          id: 0,
-          date: new Date(),
-          type: '',
-          weight: 0,
-        },
-      }, disableClose:true});
+      data: {weight: {}}, disableClose:true
+    });
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
         if(result.date === undefined){
@@ -52,33 +44,28 @@ export class FeedingTableComponent implements OnInit {
         else{
           result.date = result.date.toDate().toLocaleDateString()
         }
-        if(result.type === undefined){
-          result.type = '-';
-        }
-
         if(result.weight === undefined){
           result.weight = 0.0;
         }
-
         this.reptileService.getReptile(reptileid)
           .subscribe(reptile => {
-            reptile.feedings.push(Object.assign({}, result))
+            reptile.weight.push(Object.assign({}, result))
             this.reptileService.updateReptile(reptile).subscribe();
-            this.reptile.feedings.push(result)
+            this.reptile.weight.push(result)
             this.myTable.renderRows()
           })
       }
     });
   }
 
-  deleteFeeding(reptileid : any):void{
+  deleteWeight(reptileid : any):void{
     for (let i = 0; i<this.selection.selected.length; i++){
       for(let j = 0; j<this.dataSource.data.length; j++){
         if(this.selection.selected[i].id === this.dataSource.data[j].id){
           this.dataSource.data.splice(j,1)
           this.reptileService.getReptile(reptileid)
             .subscribe(reptile => {
-              reptile.feedings = this.dataSource.data
+              reptile.weight = this.dataSource.data
               this.reptileService.updateReptile(reptile).subscribe();
               this.myTable.renderRows()
             })
@@ -107,10 +94,11 @@ export class FeedingTableComponent implements OnInit {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: Feeding): string {
+  checkboxLabel(row?: Weight): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id}`;
   }
+
 }

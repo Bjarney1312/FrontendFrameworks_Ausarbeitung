@@ -1,4 +1,6 @@
 import {Feeding} from "./feeding";
+import {Weight} from "./weight";
+import {Note} from "./note";
 
 export interface Reptile {
   id: string;
@@ -9,4 +11,6 @@ export interface Reptile {
   art: string;
   morph: string;
   feedings: Feeding[];
+  weight: Weight[];
+  notes: Note[];
 }

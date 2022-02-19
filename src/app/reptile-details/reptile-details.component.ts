@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import {ReptileService} from "../reptile.service";
 import {Reptile} from "../data/reptile";
-import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feeding.component";
 import {MatDialog} from "@angular/material/dialog";
+import {DialogEditReptileComponent} from "../dialog-edit-reptile/dialog-edit-reptile.component";
+import {DialogDeleteReptileComponent} from "../dialog-delete-reptile/dialog-delete-reptile.component";
 
 
 @Component({
@@ -33,14 +34,49 @@ export class ReptileDetailsComponent implements OnInit {
       .subscribe(reptile => this.reptile = reptile);
   }
 
-  goBack(): void {
-    this.location.back();
+  openEditReptileDialog(): void {
+
+    this.getReptile()
+
+    const dialogRef = this.dialog.open(DialogEditReptileComponent, {
+      width: '300px',
+      data: {
+          name: this.reptile?.name,
+          geburtsdatum: this.reptile?.geburtsdatum,
+          geschlecht: this.reptile?.geschlecht,
+          ordnung: this.reptile?.ordnung,
+          art: this.reptile?.art,
+          morph: this.reptile?.morph
+        }, disableClose:true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined && this.reptile !== undefined){
+        this.reptile.name = result.name;
+        this.reptile.geburtsdatum = result.geburtsdatum;
+        this.reptile.geschlecht = result.geschlecht;
+        this.reptile.ordnung = result.ordnung;
+        this.reptile.art = result.art;
+        this.reptile.morph = result.morph;
+        this.reptileService.updateReptile(this.reptile).subscribe();
+      }
+    });
   }
 
-  save(): void {
-    if (this.reptile) {
-      this.reptileService.updateReptile(this.reptile)
-        .subscribe(() => this.goBack());
-    }
+  openDeleteDialog(): void {
+
+    const id = String(this.route.snapshot.paramMap.get('id'));
+
+    const dialogRef = this.dialog.open(DialogDeleteReptileComponent, {
+      width: '300px',
+      data: {}, disableClose:true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined){
+        this.reptileService.deleteReptile(id).subscribe();
+        this.location.back()
+      }
+    });
   }
 }

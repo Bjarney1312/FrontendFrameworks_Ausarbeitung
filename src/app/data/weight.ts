@@ -1,5 +1,5 @@
 export interface  Weight{
-  id: number;
-  date: Date;
+  id: string;
+  date: string;
   weight: number;
 }

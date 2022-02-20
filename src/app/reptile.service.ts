@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Reptile} from "./data/reptile";
+import {Breeder} from "./data/breeder";
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +76,21 @@ export class ReptileService {
       catchError(this.handleError<Reptile[]>('searchHeroes', []))
     );
   }
+
+  getReptilesByBreeder(breeder: string): Observable<Reptile[]> {
+    const url = `${this.reptileUrl}/?breeder/${breeder}`;
+
+    // let params = new HttpParams();
+    // params = params.append('breeder', breeder);
+    let params = new HttpParams().set('breeder', breeder);
+
+    return this.http.get<Reptile[]>(url, {params: params } )
+      .pipe(
+        // tap(_ => this.log(`fetched hero id=${id}`)),
+        catchError(this.handleError<Reptile[]>(`get breeder by id=${breeder}`))
+      );
+  }
+
 
   // /** Log a HeroService message with the MessageService */
   // private log(message: string) {

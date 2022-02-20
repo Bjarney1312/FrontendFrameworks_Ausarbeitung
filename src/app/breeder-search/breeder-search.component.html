@@ -1,0 +1,11 @@
+<div id="search-component">
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+  <ul class="search-result">
+    <li *ngFor="let breeder of breeders$ | async" >
+      <a (click)="openEditBreederDialog(breeder.id)">
+        {{breeder.lastName}}, {{breeder.firstName}}
+      </a>
+    </li>
+  </ul>
+</div>

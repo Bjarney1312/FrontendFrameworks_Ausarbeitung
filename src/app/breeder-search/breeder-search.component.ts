@@ -1,76 +1,45 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
+import { Component, OnInit } from '@angular/core';
+import {
+  debounceTime, distinctUntilChanged, switchMap
+} from 'rxjs/operators';
+import {Observable, Subject} from "rxjs";
 import {Breeder} from "../data/breeder";
 import {BreederService} from "../breeder.service";
-import {DialogDeleteBreederComponent} from "../dialog-delete-breeder/dialog-delete-breeder.component";
-import {DialogAddBreederComponent} from "../dialog-add-breeder/dialog-add-breeder.component";
 import {DialogEditBreederComponent} from "../dialog-edit-breeder/dialog-edit-breeder.component";
+import {MatDialog} from "@angular/material/dialog";
 import {ReptileService} from "../reptile.service";
 
 @Component({
-  selector: 'app-breeder-dashboard',
-  templateUrl: './breeder-dashboard.component.html',
-  styleUrls: ['./breeder-dashboard.component.css'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-breeder-search',
+  templateUrl: './breeder-search.component.html',
+  styleUrls: ['./breeder-search.component.css']
 })
-export class BreederDashboardComponent implements OnInit {
+export class BreederSearchComponent implements OnInit {
 
-  breeders: Breeder[] = [];
+  breeders$!: Observable<Breeder[]>;
+  private searchTerms = new Subject<string>();
+
   breeder!: Breeder;
+  breeders: Breeder[] = [];
 
-  constructor(private breederService: BreederService, private reptileService: ReptileService, public dialog: MatDialog) {
+  constructor(private breederService: BreederService, private reptileService: ReptileService, public dialog: MatDialog) {}
+
+  // Push a search term into the observable stream.
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 
   ngOnInit(): void {
-    this.getBreeders();
-  }
+    this.breeders$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
 
-  getBreeders(): void {
-    this.breederService.getBreeders()
-      .subscribe(breeders => {
-        this.breeders = breeders;
-        this.breeders.splice(0,1);
-      });
-  }
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
 
-  add(breeder: Breeder): void {
-    if (!breeder) {
-      return;
-    }
-    this.breederService.addBreeder(breeder as Breeder)
-      .subscribe(breeder => {
-        this.breeders.push(breeder);
-      });
-  }
-
-  openAddBreederDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddBreederComponent, {
-      width: '300px',
-      data: {breeder: {}}, disableClose:true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined){
-        this.breeder = result;
-        this.add(this.breeder);
-        this.getBreeders();
-      }
-    });
-  }
-
-  openDeleteBreederDialog(id: string): void {
-
-    const dialogRef = this.dialog.open(DialogDeleteBreederComponent, {
-      width: '300px',
-      data: {}, disableClose:true
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined){
-        this.breederService.deleteBreeder(id).subscribe();
-        this.getBreeders()
-      }
-    });
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.breederService.searchBreeder(term)),
+    );
   }
 
   openEditBreederDialog(id: string): void {
@@ -120,4 +89,13 @@ export class BreederDashboardComponent implements OnInit {
         });
       });
   }
+
+  getBreeders(): void {
+    this.breederService.getBreeders()
+      .subscribe(breeders => {
+        this.breeders = breeders;
+        this.breeders.splice(0,1);
+      });
+  }
+
 }

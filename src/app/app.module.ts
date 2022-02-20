@@ -47,6 +47,7 @@ import { BreederDashboardComponent } from './breeder-dashboard/breeder-dashboard
 import { DialogAddBreederComponent } from './dialog-add-breeder/dialog-add-breeder.component';
 import { DialogEditBreederComponent } from './dialog-edit-breeder/dialog-edit-breeder.component';
 import { DialogDeleteBreederComponent } from './dialog-delete-breeder/dialog-delete-breeder.component';
+import { BreederSearchComponent } from './breeder-search/breeder-search.component';
 
 
 
@@ -70,7 +71,8 @@ import { DialogDeleteBreederComponent } from './dialog-delete-breeder/dialog-del
     BreederDashboardComponent,
     DialogAddBreederComponent,
     DialogEditBreederComponent,
-    DialogDeleteBreederComponent
+    DialogDeleteBreederComponent,
+    BreederSearchComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feedin
 import {Feeding} from "../data/feeding";
 import {DialogAddWeightComponent} from "../dialog-add-weight/dialog-add-weight.component";
 import {DialogAddNoteComponent} from "../dialog-add-note/dialog-add-note.component";
+import {BreederService} from "../breeder.service";
+import {Breeder} from "../data/breeder";
 
 @Component({
   selector: 'app-reptile-dashboard',
@@ -138,5 +140,13 @@ export class ReptileDashboardComponent implements OnInit {
     });
   }
 
-
+  // getBreeder(reptileId: string):any{
+  //
+  //   this.reptileService.getReptile(reptileId).subscribe(reptile => {
+  //     this.breederService.getBreeder(reptile.breederId).subscribe(result => {
+  //       this.breeder = result;
+  //
+  //     });
+  //   })
+  // }
 }

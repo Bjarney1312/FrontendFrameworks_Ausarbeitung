@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Reptile} from "./data/reptile";
 import {Breeder} from "./data/breeder";
 
 @Injectable({
@@ -69,7 +68,7 @@ export class BreederService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<Breeder[]>(`${this.breederUrl}/?lastname=${term}`).pipe(
+    return this.http.get<Breeder[]>(`${this.breederUrl}/?lastName=${term}`).pipe(
       // tap(x => x.length ?
       //   this.log(`found heroes matching "${term}"`) :
       //   this.log(`no heroes matching "${term}"`)),

@@ -12,7 +12,7 @@ import {Note} from "../data/note";
 export class DialogAddNoteComponent implements OnInit {
 
   initialDate: Date = new Date()
-  numberControl = new FormControl('', Validators.min(0));
+  noteControl = new FormControl('', Validators.required);
 
   constructor(public dialogRef: MatDialogRef<DialogAddNoteComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Note,

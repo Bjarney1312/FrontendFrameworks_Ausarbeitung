@@ -34,7 +34,7 @@ export class WeightTableComponent implements OnInit {
   openAddWeightDialog(reptileid : any): void {
     const dialogRef = this.dialog.open(DialogAddWeightComponent, {
       width: '300px',
-      data: {weight: {}}, disableClose:true
+      data: {weights: {}}, disableClose:true
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
@@ -73,9 +73,6 @@ export class WeightTableComponent implements OnInit {
       }
     }
   }
-
-
-
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;

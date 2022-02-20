@@ -1,49 +1,67 @@
 <div class="breeder-menu">
-<div class="dashboard-header">
-  <h2>Züchter</h2>
-  <button mat-mini-fab class="add-button" color="reptiNoteTheme" aria-label="Add-Reptile-Button" (click)="openAddBreederDialog()">
-    <mat-icon>add</mat-icon>
-  </button>
-  <app-breeder-search class="searchfield"></app-breeder-search>
-  <mat-icon class="icon-search" matSuffix>search</mat-icon>
-</div>
+  <div class="dashboard-header">
+    <h2>Züchter</h2>
+    <button mat-raised-button (click)="openAddBreederDialog()" class="add-breeder-button">
+      <mat-icon> add</mat-icon>
+      Züchter hinzufügen
+    </button>
+    <app-breeder-search class="searchfield"></app-breeder-search>
+    <mat-icon class="icon-search" matSuffix>search</mat-icon>
+  </div>
 
-<div class="breeder-cards" *ngFor="let breeder of breeders">
-  <mat-card class="test">
+  <div class="breeder-cards" *ngFor="let breeder of breeders">
+    <mat-card class="test">
 
-    <mat-card-title-group>
-      <mat-card-title>{{breeder.firstName}} {{breeder.lastName}}</mat-card-title>
-      <mat-card-subtitle> {{breeder.companyName !== undefined ? breeder.companyName : '  '}}</mat-card-subtitle>
-    </mat-card-title-group>
+      <mat-card-title-group>
+        <mat-card-title>{{breeder.firstName}} {{breeder.lastName}}</mat-card-title>
+        <mat-card-subtitle> {{breeder.companyName !== undefined ? breeder.companyName : '  '}}</mat-card-subtitle>
+      </mat-card-title-group>
 
-    <mat-card-content>
-      <mat-card-title class="breeder-card-content-header">Adresse</mat-card-title>
-      <section>
-        <ul class="no-bullets">
-          <li><span class="breeder-card-content-subpoint">Name:</span> {{breeder.firstName}} {{breeder.lastName}}</li>
-          <li><span class="breeder-card-content-subpoint">Straße:</span> {{breeder.street}}</li>
-          <li><span class="breeder-card-content-subpoint">Ort:</span> {{breeder.postal}} {{breeder.place}}</li>
-          <li><span class="breeder-card-content-subpoint">Land:</span> {{breeder.country}}</li>
-        </ul>
-      </section>
-      <mat-card-title class="breeder-card-content-header">Kontakt</mat-card-title>
-      <section>
-        <ul class="no-bullets">
-          <li><span class="breeder-card-content-subpoint">Email:</span> {{breeder.email}}</li>
-          <li><span class="breeder-card-content-subpoint">Telefon:</span> {{breeder.phone}}</li>
-        </ul>
-      </section>
-    </mat-card-content>
+      <mat-card-content>
+        <mat-card-title id="breeder-card-content-header-address">Adresse</mat-card-title>
+        <table>
+          <tr>
+            <td class="table-row-first">Name:</td>
+            <td>{{breeder.firstName}} {{breeder.lastName}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Straße:</td>
+            <td>{{breeder.street}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Ort:</td>
+            <td>{{breeder.postal}} {{breeder.place}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Land:</td>
+            <td>{{breeder.country}}</td>
+          </tr>
+        </table>
 
-    <mat-card-actions align="end">
-      <button mat-mini-fab class="breeder-buttons" color="reptiNoteTheme" aria-label="Details-Button" (click)="openEditBreederDialog(breeder.id)">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-mini-fab class="breeder-buttons" color="warn" aria-label="Details-Button" (click)="openDeleteBreederDialog(breeder.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+        <mat-card-title id="breeder-card-content-header-contact">Kontakt</mat-card-title>
+        <table>
+          <tr>
+            <td class="table-row-first">Email:</td>
+            <td>{{breeder.email}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Telefon:</td>
+            <td>{{breeder.phone}}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-mini-fab class="breeder-buttons" color="reptiNoteTheme" aria-label="Details-Button"
+                (click)="openEditBreederDialog(breeder.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab class="breeder-buttons" color="warn" aria-label="Details-Button"
+                (click)="openDeleteBreederDialog(breeder.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 

@@ -1,5 +1,5 @@
 <div id="search-component">
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" placeholder="Nachname" />
 
   <ul class="search-result">
     <li *ngFor="let breeder of breeders$ | async" >

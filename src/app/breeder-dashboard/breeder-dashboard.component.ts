@@ -45,7 +45,7 @@ export class BreederDashboardComponent implements OnInit {
 
   openAddBreederDialog(): void {
     const dialogRef = this.dialog.open(DialogAddBreederComponent, {
-      width: '300px',
+      width: '560px',
       data: {breeder: {}}, disableClose:true
     });
 
@@ -80,7 +80,7 @@ export class BreederDashboardComponent implements OnInit {
         this.breeder = breeder;
 
         const dialogRef = this.dialog.open(DialogEditBreederComponent, {
-          width: '300px',
+          width: '560px',
           data: {
             companyName: this.breeder.companyName,
             firstName: this.breeder.firstName,

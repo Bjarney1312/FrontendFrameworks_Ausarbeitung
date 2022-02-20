@@ -12,7 +12,7 @@ mat-card{
   margin: 10px;
 }
 
-.reptiles-menu{
+.breeder-menu{
   margin-left: 50px;
   margin-right: 70px;
 }
@@ -48,23 +48,30 @@ mat-card{
   margin-top: 25px;
 }
 
-.add-button{
-  margin-top: 15px;
+.add-breeder-button{
+  margin-top: 18px;
+  color: white;
+  background-color: dimgrey;
+  width: 200px;
+  height: 40px;
 }
 
-.breeder-card-content-header{
+#breeder-card-content-header-address{
+  border-top: 1px solid grey;
+  padding-top: 10px;
   font-size: large;
+  margin-bottom: 0px;
 }
 
-.breeder-card-content-subpoint{
-  font-weight: bold;
+#breeder-card-content-header-contact{
+  border-top: 1px solid grey;
+  padding-top: 10px;
+  font-size: large;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+
+.table-row-first{
   color: dimgrey;
-  padding:  -20px;
+  padding-right: 5px;
 }
-
-ul.no-bullets {
-  list-style-type: none; /* Remove bullets */
-  padding-left: 10px; /* Remove padding */
-  margin-left:0; /* Remove margins */
-}
-

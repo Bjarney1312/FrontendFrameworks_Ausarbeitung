@@ -1,10 +1,10 @@
 <div class="mat-elevation-z8" *ngIf="reptile">
 
-  <button mat-raised-button (click)="openAddFeedingDialog(reptile.id)" class="add-feeding-button" color="reptiNoteTheme">
+  <button mat-raised-button color="reptiNoteTheme" (click)="openAddFeedingDialog(reptile.id)" class="add-feeding-button">
     <mat-icon> add </mat-icon>  Fütterung hinzufügen
   </button>
 
-  <button mat-raised-button (click)="deleteFeeding(reptile.id)" class="add-feeding-button" color="reptiNoteTheme">
+  <button mat-raised-button color="reptiNoteThemeRed" (click)="deleteFeeding(reptile.id)" class="add-feeding-button">
     <mat-icon> remove </mat-icon>  Fütterung entfernen
   </button>
 

@@ -12,7 +12,7 @@ mat-card{
    margin: 10px;
  }
 
-.breeder-menu{
+.reptiles-menu{
   margin-left: 50px;
   margin-right: 70px;
 }
@@ -50,7 +50,7 @@ mat-card{
   padding-left: 40px;
 }
 
-.add-feeding-button{
+.add-reptile-button{
   margin-top: 18px;
   color: white;
   background-color: dimgrey;

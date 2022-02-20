@@ -1,9 +1,5 @@
 .add-reptile-dialog-input{
   width: 250px;
-}
-
-.add-reptile-dialog-input{
-  width: 250px;
   margin-right: 10px;
 }
 
@@ -29,3 +25,5 @@
 .button-add.disabled{
   color: white;
 }
+
+

@@ -46,7 +46,9 @@ export class ReptileDetailsComponent implements OnInit {
           geschlecht: this.reptile?.geschlecht,
           ordnung: this.reptile?.ordnung,
           art: this.reptile?.art,
-          morph: this.reptile?.morph
+          morph: this.reptile?.morph,
+          breeder: this.reptile?.breeder,
+          imageURL:this.reptile?.imageURL
         }, disableClose:true
     });
 
@@ -58,6 +60,8 @@ export class ReptileDetailsComponent implements OnInit {
         this.reptile.ordnung = result.ordnung;
         this.reptile.art = result.art;
         this.reptile.morph = result.morph;
+        this.reptile.breeder = result.breeder;
+        this.reptile.imageURL = result.imageURL;
         this.reptileService.updateReptile(this.reptile).subscribe();
       }
     });

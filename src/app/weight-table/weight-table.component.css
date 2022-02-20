@@ -12,3 +12,25 @@ mat-paginator{
 .weight-button{
   margin: 20px;
 }
+
+.mat-reptiNoteThemeRed{
+  background-color: #f44336;
+  color: white;
+}
+
+.mat-reptiNoteTheme{
+  background-color: darkolivegreen;
+  color: white;
+}
+
+::ng-deep.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: darkolivegreen !important;
+}
+
+::ng-deep .mat-checkbox-ripple .mat-ripple-element {
+  background-color: royalblue !important;
+}
+
+::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: dimgrey !important;
+}

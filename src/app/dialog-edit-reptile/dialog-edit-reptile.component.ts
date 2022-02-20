@@ -31,7 +31,7 @@ export class DialogEditReptileComponent implements OnInit {
     'Weiblich',
     'Unbekannt'
   ]
-  breeders!: Breeder[];
+  breeders: Breeder[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditReptileComponent>,
@@ -40,6 +40,7 @@ export class DialogEditReptileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getBreeders()
   }
 
   onNoClick(): void {
@@ -49,7 +50,14 @@ export class DialogEditReptileComponent implements OnInit {
   getBreeders(): void{
     this.breederService.getBreeders().subscribe(breeders => {
       this.breeders = breeders;
-      this.data.breeder = breeders[0];
+
+      // Breeder wird richtig übergeben, muss das aber trotzdem nochmal machen, damit der
+      // Züchter auch vorausgewählt im Bearbeiten-Dialog ist ?!?!?!
+      for(let i = 0; i<breeders.length; i++){
+        if(breeders[i].id === this.data.breeder.id){
+          this.data.breeder = breeders[i];
+        }
+      }
     })
   }
 

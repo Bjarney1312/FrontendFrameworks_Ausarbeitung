@@ -1,0 +1,28 @@
+.edit-breeder-dialog-input{
+  width: 250px;
+  margin-right: 10px;
+}
+
+.edit-breeder-dialog-input-full{
+  width: 513px;
+}
+
+.edit-breeder-dialog-p{
+  margin-bottom: 0px;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: black !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: dimgrey !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: dimgrey !important;;
+}
+
+.button-add.disabled{
+  color: white;
+}

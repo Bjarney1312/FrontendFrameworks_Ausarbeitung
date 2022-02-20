@@ -1,0 +1,15 @@
+.add-weight-dialog-input{
+  width: 250px;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  color: black !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: dimgrey !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: dimgrey !important;;
+}

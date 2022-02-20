@@ -15,4 +15,5 @@ export interface Reptile {
   weight: Weight[];
   notes: Note[];
   breeder: Breeder;
+  imageURL: string;
 }

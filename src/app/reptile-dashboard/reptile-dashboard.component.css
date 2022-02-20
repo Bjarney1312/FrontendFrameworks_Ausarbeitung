@@ -25,7 +25,7 @@ mat-card{
   display: grid;
   grid-template-areas:
     "a b c d e";
-  grid-template-columns: 180px 30px auto 30px 300px;
+  grid-template-columns: 180px 200px auto 30px 300px;
 }
 
 .dashboard-header h2{
@@ -37,19 +37,30 @@ mat-card{
 
 .searchfield{
   grid-area: e;
-  justify-self: end;
+  height: 40px;
   width: 300px;
   margin-top: 20px;
   padding-left: 50px;
+  border-color: dimgrey;
 }
 
 .icon-search{
   grid-area: d;
-  margin-top: 25px;
+  padding-top: 4px;
+  padding-left: 40px;
 }
 
-.add-button{
-  margin-top: 15px;
+.add-feeding-button{
+  margin-top: 18px;
+  color: white;
+  background-color: dimgrey;
+  width: 200px;
+  height: 40px;
+}
+
+.table-row-first{
+  color: dimgrey;
+  padding-right: 5px;
 }
 
 

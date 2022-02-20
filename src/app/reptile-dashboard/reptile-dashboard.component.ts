@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ReptileService } from '../reptile.service';
 import {Reptile} from "../data/reptile";
 import {MatDialog} from "@angular/material/dialog";
@@ -7,8 +7,6 @@ import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feedin
 import {Feeding} from "../data/feeding";
 import {DialogAddWeightComponent} from "../dialog-add-weight/dialog-add-weight.component";
 import {DialogAddNoteComponent} from "../dialog-add-note/dialog-add-note.component";
-import {BreederService} from "../breeder.service";
-import {Breeder} from "../data/breeder";
 
 @Component({
   selector: 'app-reptile-dashboard',
@@ -27,8 +25,8 @@ export class ReptileDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getReptiles();
-
   }
+
 
   getReptiles(): void {
     this.reptileService.getReptiles()
@@ -49,13 +47,20 @@ export class ReptileDashboardComponent implements OnInit {
 
   openAddReptileDialog(): void {
     const dialogRef = this.dialog.open(DialogAddReptileComponent, {
-      width: '300px',
+      width: '560px',
       data: {reptile: {}}, disableClose:true
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
+
         this.reptile = result;
+        this.reptile.feedings = [];
+        this.reptile.weight = [];
+        this.reptile.notes = [];
+        if(result.imageURL === undefined){
+          this.reptile.imageURL = 'https://icon-library.com/images/reptile-icon/reptile-icon-26.jpg'
+        }
         this.add(this.reptile);
         this.getReptiles();
       }
@@ -139,14 +144,4 @@ export class ReptileDashboardComponent implements OnInit {
       }
     });
   }
-
-  // getBreeder(reptileId: string):any{
-  //
-  //   this.reptileService.getReptile(reptileId).subscribe(reptile => {
-  //     this.breederService.getBreeder(reptile.breederId).subscribe(result => {
-  //       this.breeder = result;
-  //
-  //     });
-  //   })
-  // }
 }

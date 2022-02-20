@@ -2,8 +2,8 @@
 
   <div class="dashboard-header">
     <h2>Meine Tiere</h2>
-    <button mat-mini-fab class="add-button" color="reptiNoteTheme" aria-label="Add-Reptile-Button" (click)="openAddReptileDialog()" >
-      <mat-icon>add</mat-icon>
+    <button mat-raised-button (click)="openAddReptileDialog()" class="add-feeding-button">
+      <mat-icon> add </mat-icon>  Tier hinzufügen
     </button>
     <app-reptile-search class="searchfield"></app-reptile-search>
     <mat-icon class="icon-search" matSuffix>search</mat-icon>
@@ -16,23 +16,40 @@
       <mat-card-title-group>
         <mat-card-title>{{reptile.name}}</mat-card-title>
         <mat-card-subtitle>{{reptile.ordnung}} | {{reptile.art}}</mat-card-subtitle>
-        <img mat-card-md-image src="https://cdn.pixabay.com/photo/2015/05/29/21/50/heterodon-nasicus-789863_1280.jpg" alt="Photo of a Hognose">
+        <img mat-card-md-image src="{{reptile.imageURL}}" alt="Photo of your animal">
       </mat-card-title-group>
 
       <mat-card-content>
-        <section>
-          <p>Geburtsdatum: {{reptile.geburtsdatum}}</p>
-          <p>Geschlecht: {{reptile.geschlecht}}</p>
-          <p>Morph: {{reptile.morph}}</p>
-          <p>Züchter: {{reptile.breeder.companyName !== ''? reptile.breeder.companyName + ': ' : ''}}
-            {{reptile.breeder.firstName}} {{reptile.breeder.lastName}}</p>
-          <p>Letzte Fütterung: {{reptile.feedings[reptile.feedings.length-1]? reptile.feedings[reptile.feedings.length-1].date : '-'}}</p>
-
-        </section>
+        <table>
+          <tr>
+            <td class="table-row-first">Geburtsdatum:</td>
+            <td>{{reptile.geburtsdatum}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Geschlecht:</td>
+            <td>{{reptile.geschlecht}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Morph:</td>
+            <td>{{reptile.morph}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Züchter:</td>
+            <td>{{reptile.breeder.firstName}} {{reptile.breeder.lastName}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Gewicht:</td>
+            <td>{{reptile.weight[reptile.weight.length-1]? reptile.weight[reptile.weight.length-1].weight + ' g' : '-'}}</td>
+          </tr>
+          <tr>
+            <td class="table-row-first">Letzte Fütterung:</td>
+            <td>{{reptile.feedings[reptile.feedings.length-1]? reptile.feedings[reptile.feedings.length-1].date : '-'}}</td>
+          </tr>
+        </table>
       </mat-card-content>
 
       <mat-card-actions align="end">
-        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteThemeBlue" aria-label="Details-Button" routerLink="/detail/{{reptile.id}}">
           <mat-icon>search</mat-icon>
         </button>
         <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Fast-Feed-Button" (click)="openAddFeedingDialog(reptile.id)">

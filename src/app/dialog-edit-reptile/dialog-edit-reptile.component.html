@@ -1,60 +1,92 @@
-<script src="../data/reptile.ts"></script><h2 mat-dialog-title>Tier hinzufügen</h2>
+<script src="../data/reptile.ts"></script>
+
+<h2 mat-dialog-title>Tier hinzufügen</h2>
 <mat-dialog-content class="mat-typography">
 
   <form class="add-reptile-form">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+            <mat-label>Name</mat-label>
+            <input matInput name="name" id="reptile-name" [(ngModel)]="data.name" [formControl]="nameControl" required>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+            <mat-label>Geburtsdatum</mat-label>
+            <input matInput name="geburtsdatum" id="reptile-geburtsdatum" [(ngModel)]="data.geburtsdatum">
+          </mat-form-field>
+        </td>
+      </tr>
 
-    <p>
-      <mat-form-field appearance="fill" class="add-reptile-dialog-input">
-        <mat-label>Name</mat-label>
-        <input matInput name="name" id="reptile-name" [(ngModel)]="data.name" [formControl]="nameControl" required>
-      </mat-form-field>
-    </p>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+            <mat-label>Geschlecht</mat-label>
+            <mat-select name="gender" [(ngModel)]="data.geschlecht">
+              <mat-option *ngFor="let gender of genders" [value]="gender">
+                {{gender}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+            <mat-label>Morph</mat-label>
+            <input matInput name="morph" id="reptile-morph" class="add-reptile-dialog-input" [(ngModel)]="data.morph" >
+          </mat-form-field>
+        </td>
+      </tr>
 
-    <p>
-      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
-        <mat-label>Geburtsdatum</mat-label>
-        <input matInput name="geburtsdatum" id="reptile-geburtsdatum" [(ngModel)]="data.geburtsdatum">
-      </mat-form-field>
-    </p>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
+            <mat-label>Ordnung</mat-label>
+            <mat-select [formControl]="orderControl" required [(ngModel)]="data.ordnung">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let order of orders" [value]="order">
+                {{order}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="orderControl.hasError('required')">Bitte Tier zuordnen</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+            <mat-label>Art</mat-label>
+            <input matInput name="art" id="reptile-art" [(ngModel)]="data.art" [formControl]="typeControl" required >
+          </mat-form-field>
+        </td>
+      </tr>
 
-    <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
-      <mat-label>Geschlecht</mat-label>
-      <mat-select [(ngModel)]="data.geschlecht" [ngModelOptions]="{standalone: true}">
-        <mat-option *ngFor="let gender of genders" [value]="gender">
-          {{gender}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+            <mat-label>Züchter</mat-label>
+            <mat-select [(ngModel)]="data.breeder" [ngModelOptions]="{standalone: true}">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let breeder of breeders" [value]="breeder">
+                {{breeder.firstName}} {{breeder.lastName}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="orderControl.hasError('required')">Bitte Tier zuordnen</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill" class="add-reptile-dialog-input">
+            <mat-label>Image URL</mat-label>
+            <input matInput name="name" id="reptile-image" [(ngModel)]="data.imageURL">
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
 
-    <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
-      <mat-label>Ordnung</mat-label>
-      <mat-select [formControl]="orderControl" required [(ngModel)]="data.ordnung">
-        <mat-option>--</mat-option>
-        <mat-option *ngFor="let order of orders" [value]="order">
-          {{order}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="orderControl.hasError('required')">Bitte Tier zuordnen</mat-error>
-    </mat-form-field>
-
-    <p>
-      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
-        <mat-label>Art</mat-label>
-        <input matInput name="art" id="reptile-art" [(ngModel)]="data.art" [formControl]="typeControl" required >
-      </mat-form-field>
-    </p>
-
-    <p>
-      <mat-form-field appearance="fill" class="add-reptile-dialog-input" >
-        <mat-label>Morph</mat-label>
-        <input matInput name="morph" id="reptile-morph" class="add-reptile-dialog-input" [(ngModel)]="data.morph" >
-      </mat-form-field>
-    </p>
   </form>
 
 </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="orderControl.invalid || typeControl.invalid || nameControl.invalid">Bearbeiten</button>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close  (click)="onNoClick()">Abbrechen</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="orderControl.invalid || typeControl.invalid || nameControl.invalid" color="reptiNoteTheme" id="button-add">Hinzufügen</button>
 </mat-dialog-actions>

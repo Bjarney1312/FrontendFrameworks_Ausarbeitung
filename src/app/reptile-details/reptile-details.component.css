@@ -76,6 +76,10 @@ mat-card {
   grid-area: dates;
 }
 
+.card-content-bottom{
+  margin-top: 10px;
+}
+
 mat-tab-group{
   width: 95%;
   margin: 20px;

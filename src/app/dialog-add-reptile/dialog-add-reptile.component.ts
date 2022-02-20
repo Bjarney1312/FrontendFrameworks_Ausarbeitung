@@ -3,6 +3,8 @@ import {Reptile} from "../data/reptile";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, Validators} from "@angular/forms";
 import {v4 as uuidv4} from 'uuid';
+import {Breeder} from "../data/breeder";
+import {BreederService} from "../breeder.service";
 
 @Component({
   selector: 'app-dialog-add-reptile',
@@ -29,18 +31,30 @@ export class DialogAddReptileComponent implements OnInit {
     'Weiblich',
     'Unbekannt'
   ]
+  breeders!: Breeder[];
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddReptileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Reptile,
+    private breederService: BreederService,
   ) {}
 
   ngOnInit(): void {
+    this.getBreeders();
     this.data.id = uuidv4();
     this.data.geschlecht = 'Unbekannt';
+
+
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  getBreeders(): void{
+    this.breederService.getBreeders().subscribe(breeders => {
+      this.breeders = breeders;
+      this.data.breeder = breeders[0];
+    })
   }
 }

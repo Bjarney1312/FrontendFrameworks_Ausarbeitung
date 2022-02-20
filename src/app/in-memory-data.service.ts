@@ -52,6 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
         weight: [],
         notes: [],
         breeder: breeders[1],
+        imageURL: 'https://i.ibb.co/T1rggYm/Hubert.png',
       },
 
       {
@@ -65,7 +66,8 @@ export class InMemoryDataService implements InMemoryDbService {
         feedings: [],
         weight: [],
         notes: [],
-        breeder: breeders[0]
+        breeder: breeders[0],
+        imageURL: 'https://i.ibb.co/109Gkpr/Tifa.jpg',
       },
       {
         id: '3',
@@ -78,7 +80,8 @@ export class InMemoryDataService implements InMemoryDbService {
         feedings: [],
         weight: [],
         notes: [],
-        breeder: breeders[0]
+        breeder: breeders[0],
+        imageURL: 'https://i.ibb.co/BLnjXz7/Hektor.jpg',
       },
     ];
 

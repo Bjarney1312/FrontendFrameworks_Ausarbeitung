@@ -15,6 +15,7 @@
   background-color: transparent;
   background-repeat: no-repeat;
   font-size: large;
+  color: white;
 }
 
 #applikation_title{
@@ -40,5 +41,10 @@
 
 .mat-reptiNoteTheme{
   background-color: darkolivegreen;
+  color: white;
+}
+
+.mat-reptiNoteThemeBlue{
+  background-color: royalblue;
   color: white;
 }

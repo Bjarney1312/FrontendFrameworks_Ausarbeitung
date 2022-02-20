@@ -1,25 +1,24 @@
 <script src="../data/reptile.ts"></script><h2 mat-dialog-title>Notiz hinzufügen</h2>
 <mat-dialog-content class="mat-typography">
 
-  <form class="add-feeding-form">
+  <form class="add-note-form">
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="add-note-dialog-input">
       <input matInput [matDatepicker]="picker" [(ngModel)]="data.date" [ngModelOptions]="{standalone: true}" placeholder="{{initialDate.toLocaleDateString()}}" >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <p>
-      <mat-form-field class="example-full-width" appearance="fill">
+
+      <mat-form-field appearance="fill" class="add-note-dialog-input">
         <mat-label>Notiz</mat-label>
         <textarea matInput [(ngModel)]="data.note" [ngModelOptions]="{standalone: true}"></textarea>
       </mat-form-field>
-    </p>
   </form>
 
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
   <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Hinzufügen</button>
+  <button mat-button [mat-dialog-close]="data" color="reptiNoteTheme">Hinzufügen</button>
 </mat-dialog-actions>

@@ -8,7 +8,7 @@
         <mat-card-subtitle>{{reptile.ordnung}} | {{reptile.art}}</mat-card-subtitle>
       </mat-card-header>
 
-      <img mat-card-image src="https://cdn.pixabay.com/photo/2015/05/29/21/50/heterodon-nasicus-789863_1280.jpg" alt="Photo of a Hognose">
+      <img mat-card-image src="{{reptile.imageURL}}" alt="Place for a picture of your beautiful Animal :)">
 
       <mat-card-content>
         <section id="card-content-left">
@@ -19,18 +19,26 @@
 
         <section id="card-section-right">
           <p>
-            <span class="card-content-subpoints">Letzte Fütterung:</span>
-            {{reptile.feedings[reptile.feedings.length-1]? reptile.feedings[reptile.feedings.length-1].date : '-'}}
+            <span class="card-content-subpoints">Züchter: </span>
+            {{reptile.breeder.firstName}} {{reptile.breeder.lastName}}
           </p>
           <p>
             <span class="card-content-subpoints">Gewicht: </span>
             {{reptile.weight[reptile.weight.length-1]? reptile.weight[reptile.weight.length-1].weight : '-'}} g
           </p>
           <p>
+            <span class="card-content-subpoints">Letzte Fütterung:</span>
+            {{reptile.feedings[reptile.feedings.length-1]? reptile.feedings[reptile.feedings.length-1].date : '-'}}
+          </p>
+        </section>
+
+        <section class="card-content-bottom">
+          <p>
             <span class="card-content-subpoints">Notiz: </span>
             {{reptile.notes[reptile.notes.length-1]? reptile.notes[reptile.notes.length-1].note : '-'}}
           </p>
         </section>
+
       </mat-card-content>
 
       <mat-card-actions align="end">

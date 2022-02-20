@@ -39,7 +39,7 @@ export class ReptileDetailsComponent implements OnInit {
     this.getReptile()
 
     const dialogRef = this.dialog.open(DialogEditReptileComponent, {
-      width: '300px',
+      width: '560px',
       data: {
           name: this.reptile?.name,
           geburtsdatum: this.reptile?.geburtsdatum,

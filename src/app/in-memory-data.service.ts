@@ -12,7 +12,7 @@ import {Breeder} from "./data/breeder";
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const breeders: Breeder[] = [
+    let breeders: Breeder[] = [
       {
         id: '0',
         companyName: '',
@@ -39,7 +39,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
      ];
 
-    const reptiles: Reptile[] = [
+    let reptiles: Reptile[] = [
       {
         id: '1',
         name: 'Hubert',
@@ -54,7 +54,6 @@ export class InMemoryDataService implements InMemoryDbService {
         breeder: breeders[1],
         imageURL: 'https://i.ibb.co/T1rggYm/Hubert.png',
       },
-
       {
         id: '2',
         name: 'Tifa',
@@ -135,6 +134,21 @@ export class InMemoryDataService implements InMemoryDbService {
     reptiles[0].notes.push(notes[0]);
     reptiles[0].notes.push(notes[1]);
 
-    return {reptiles, breeders};
+    console.log("Ähm: " + localStorage.getItem('reptiles'))
+    if(localStorage.getItem('reptiles') !== null){
+      console.log("Ich hole mir die alten Daten")
+      breeders = JSON.parse(<string>localStorage.getItem('breeders')) || []
+      reptiles = JSON.parse(<string>localStorage.getItem('reptiles')) || []
+      return {reptiles, breeders};
+    }
+    else{
+      console.log("Ich mache neue  Daten")
+      localStorage.setItem('reptiles', JSON.stringify(reptiles))
+      localStorage.setItem('breeders', JSON.stringify(breeders))
+      return {reptiles, breeders};
+    }
+
+
+
   }
 }

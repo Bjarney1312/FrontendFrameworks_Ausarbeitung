@@ -25,23 +25,18 @@ export class ReptileDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getReptile()
-    this.reptile = JSON.parse(<string>localStorage.getItem('reptiles')).find((reptile: { id: string; }) =>
-      reptile.id === String(this.route.snapshot.paramMap.get('id')))
+      this.getReptile();
   }
 
   getReptile(): void {
-    const id = String(this.route.snapshot.paramMap.get('id'));
-    this.reptileService.getReptile(id)
-      .subscribe(reptile => {
-        this.reptile = reptile;
-        localStorage.setItem('reptile', JSON.stringify(this.reptile));
-      });
+      const id = String(this.route.snapshot.paramMap.get('id'));
+      this.reptileService.getReptile(id)
+        .subscribe(reptile => {
+          this.reptile = reptile;
+        });
   }
 
   openEditReptileDialog(): void {
-
-    this.getReptile()
 
     const dialogRef = this.dialog.open(DialogEditReptileComponent, {
       width: '560px',
@@ -68,6 +63,10 @@ export class ReptileDetailsComponent implements OnInit {
         this.reptile.breeder = result.breeder;
         this.reptile.imageURL = result.imageURL;
         this.reptileService.updateReptile(this.reptile).subscribe();
+
+        this.reptileService.getReptiles().subscribe(reptiles =>{
+          localStorage.setItem('reptiles', JSON.stringify(reptiles))
+        });
       }
     });
   }

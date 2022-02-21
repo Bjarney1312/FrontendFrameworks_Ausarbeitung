@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ReptileService } from '../reptile.service';
 import {Reptile} from "../data/reptile";
 import {MatDialog} from "@angular/material/dialog";
@@ -25,12 +25,7 @@ export class ReptileDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem('reptiles') === null){
-      this.getReptiles();
-    }
-    else{
-      this.reptiles = JSON.parse(<string>localStorage.getItem('reptiles')) || [];
-    }
+    this.getReptiles()
   }
 
 
@@ -48,8 +43,6 @@ export class ReptileDashboardComponent implements OnInit {
     this.reptileService.addReptile(reptile as Reptile)
       .subscribe(reptile => {
         this.reptiles.push(reptile);
-        // var oldLocalStorage = JSON.parse(<string>localStorage.getItem('reptiles')) || [];
-        // oldLocalStorage.push(this.reptiles)
         localStorage.setItem('reptiles', JSON.stringify(this.reptiles));
       });
   }
@@ -71,7 +64,6 @@ export class ReptileDashboardComponent implements OnInit {
           this.reptile.imageURL = 'https://icon-library.com/images/reptile-icon/reptile-icon-26.jpg'
         }
         this.add(this.reptile);
-        // this.getReptiles();
       }
     });
   }

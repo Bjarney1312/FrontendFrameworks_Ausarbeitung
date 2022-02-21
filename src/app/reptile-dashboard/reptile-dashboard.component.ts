@@ -21,10 +21,16 @@ export class ReptileDashboardComponent implements OnInit {
   feeding!: Feeding;
 
   constructor(private reptileService: ReptileService, public dialog: MatDialog) {
+
   }
 
   ngOnInit(): void {
-    this.getReptiles();
+    if(localStorage.getItem('reptiles') === null){
+      this.getReptiles();
+    }
+    else{
+      this.reptiles = JSON.parse(<string>localStorage.getItem('reptiles')) || [];
+    }
   }
 
 
@@ -42,6 +48,9 @@ export class ReptileDashboardComponent implements OnInit {
     this.reptileService.addReptile(reptile as Reptile)
       .subscribe(reptile => {
         this.reptiles.push(reptile);
+        // var oldLocalStorage = JSON.parse(<string>localStorage.getItem('reptiles')) || [];
+        // oldLocalStorage.push(this.reptiles)
+        localStorage.setItem('reptiles', JSON.stringify(this.reptiles));
       });
   }
 
@@ -62,7 +71,7 @@ export class ReptileDashboardComponent implements OnInit {
           this.reptile.imageURL = 'https://icon-library.com/images/reptile-icon/reptile-icon-26.jpg'
         }
         this.add(this.reptile);
-        this.getReptiles();
+        // this.getReptiles();
       }
     });
   }

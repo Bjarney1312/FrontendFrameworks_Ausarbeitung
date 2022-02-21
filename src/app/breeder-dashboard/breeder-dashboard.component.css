@@ -46,6 +46,7 @@ mat-card{
 .icon-search{
   grid-area: d;
   margin-top: 25px;
+  padding-left: 40px;
 }
 
 .add-breeder-button{
@@ -60,14 +61,14 @@ mat-card{
   border-top: 1px solid grey;
   padding-top: 10px;
   font-size: large;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 
 #breeder-card-content-header-contact{
   border-top: 1px solid grey;
   padding-top: 10px;
   font-size: large;
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   margin-top: 10px;
 }
 

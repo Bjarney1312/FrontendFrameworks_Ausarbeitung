@@ -25,13 +25,18 @@ export class ReptileDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getReptile();
+    // this.getReptile()
+    this.reptile = JSON.parse(<string>localStorage.getItem('reptiles')).find((reptile: { id: string; }) =>
+      reptile.id === String(this.route.snapshot.paramMap.get('id')))
   }
 
   getReptile(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.reptileService.getReptile(id)
-      .subscribe(reptile => this.reptile = reptile);
+      .subscribe(reptile => {
+        this.reptile = reptile;
+        localStorage.setItem('reptile', JSON.stringify(this.reptile));
+      });
   }
 
   openEditReptileDialog(): void {

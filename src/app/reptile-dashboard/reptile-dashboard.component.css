@@ -46,7 +46,7 @@ mat-card{
 
 .icon-search{
   grid-area: d;
-  padding-top: 4px;
+  margin-top: 25px;
   padding-left: 40px;
 }
 

@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Reptile} from "../data/reptile";
 import {FormControl, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {v4 as uuidv4} from "uuid";
 import {Breeder} from "../data/breeder";
 import {BreederService} from "../breeder.service";
 
@@ -50,7 +49,6 @@ export class DialogEditReptileComponent implements OnInit {
   getBreeders(): void{
     this.breederService.getBreeders().subscribe(breeders => {
       this.breeders = breeders;
-
       // Breeder wird richtig übergeben, muss das aber trotzdem nochmal machen, damit der
       // Züchter auch vorausgewählt im Bearbeiten-Dialog ist ?!?!?!
       for(let i = 0; i<breeders.length; i++){

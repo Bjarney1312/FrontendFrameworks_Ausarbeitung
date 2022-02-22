@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Reptile} from "../data/reptile";
 import {MatTable, MatTableDataSource} from "@angular/material/table";
-import {Feeding} from "../data/feeding";
 import {SelectionModel} from "@angular/cdk/collections";
 import {Weight} from "../data/weight";
 import {MatDialog} from "@angular/material/dialog";
@@ -21,14 +20,20 @@ export class WeightTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: any[] = ['select', 'date', 'weight'];
   dataSource!:MatTableDataSource<Weight>
-
   selection = new SelectionModel<Weight>(true, []);
 
-  constructor(public dialog: MatDialog, private reptileService: ReptileService) { }
+  constructor(public dialog: MatDialog,
+              private reptileService: ReptileService) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Weight>(this.reptile.weight);
     this.dataSource.paginator = this.paginator;
+  }
+
+  updateReptileStorage():void{
+    this.reptileService.getReptiles().subscribe(reptiles =>{
+      localStorage.setItem('reptiles', JSON.stringify(reptiles))
+    });
   }
 
   openAddWeightDialog(reptileid : any): void {
@@ -42,7 +47,7 @@ export class WeightTableComponent implements OnInit {
           result.date = new Date().toLocaleDateString();
         }
         else{
-          result.date = result.date.toDate().toLocaleDateString()
+          result.date = result.date.toLocaleDateString();
         }
         if(result.weight === undefined){
           result.weight = 0.0;
@@ -51,8 +56,9 @@ export class WeightTableComponent implements OnInit {
           .subscribe(reptile => {
             reptile.weight.push(Object.assign({}, result))
             this.reptileService.updateReptile(reptile).subscribe();
-            this.reptile.weight.push(result)
-            this.myTable.renderRows()
+            this.reptile.weight.push(result);
+            this.updateReptileStorage();
+            this.myTable.renderRows();
           })
       }
     });
@@ -62,12 +68,13 @@ export class WeightTableComponent implements OnInit {
     for (let i = 0; i<this.selection.selected.length; i++){
       for(let j = 0; j<this.dataSource.data.length; j++){
         if(this.selection.selected[i].id === this.dataSource.data[j].id){
-          this.dataSource.data.splice(j,1)
+          this.dataSource.data.splice(j,1);
           this.reptileService.getReptile(reptileid)
             .subscribe(reptile => {
               reptile.weight = this.dataSource.data
               this.reptileService.updateReptile(reptile).subscribe();
-              this.myTable.renderRows()
+              this.updateReptileStorage();
+              this.myTable.renderRows();
             })
         }
       }

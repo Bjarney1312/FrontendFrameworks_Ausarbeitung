@@ -1,6 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Reptile} from "../data/reptile";
-import {FormControl, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {v4 as uuidv4} from "uuid";
 import {Breeder} from "../data/breeder";
@@ -13,9 +11,6 @@ import {Breeder} from "../data/breeder";
 export class DialogAddBreederComponent implements OnInit {
 
   breeders: Breeder[] = [];
-  orderControl = new FormControl('', Validators.required);
-  nameControl = new FormControl('', Validators.required);
-  typeControl = new FormControl('', Validators.required);
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddBreederComponent>,
@@ -29,5 +24,4 @@ export class DialogAddBreederComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

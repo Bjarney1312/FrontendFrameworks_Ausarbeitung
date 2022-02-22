@@ -36,15 +36,12 @@ export class DialogAddReptileComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogAddReptileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Reptile,
-    private breederService: BreederService,
-  ) {}
+    private breederService: BreederService) {}
 
   ngOnInit(): void {
     this.getBreeders();
     this.data.id = uuidv4();
     this.data.geschlecht = 'Unbekannt';
-
-
   }
 
   onNoClick(): void {

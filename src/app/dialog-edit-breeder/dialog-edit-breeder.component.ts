@@ -1,9 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Feeding} from "../data/feeding";
-import {v4 as uuidv4} from "uuid";
-import {DialogAddBreederComponent} from "../dialog-add-breeder/dialog-add-breeder.component";
 import {Breeder} from "../data/breeder";
 
 @Component({
@@ -17,12 +14,9 @@ export class DialogEditBreederComponent implements OnInit {
   numberControl = new FormControl('', Validators.min(0));
 
   constructor(public dialogRef: MatDialogRef<DialogEditBreederComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Breeder,
-  ) {}
+              @Inject(MAT_DIALOG_DATA) public data: Breeder) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onNoClick(): void {
     this.dialogRef.close();

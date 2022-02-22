@@ -15,8 +15,7 @@ export class DialogAddWeightComponent implements OnInit {
   numberControl = new FormControl('', Validators.min(0));
 
   constructor(public dialogRef: MatDialogRef<DialogAddWeightComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Weight,
-  ) {}
+              @Inject(MAT_DIALOG_DATA) public data: Weight) {}
 
   ngOnInit(): void {
     this.data.id = uuidv4();
@@ -25,5 +24,4 @@ export class DialogAddWeightComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

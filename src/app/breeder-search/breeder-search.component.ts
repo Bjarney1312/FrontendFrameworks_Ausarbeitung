@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {Observable, Subject} from "rxjs";
 import {Breeder} from "../data/breeder";
 import {BreederService} from "../breeder.service";
@@ -18,32 +16,34 @@ export class BreederSearchComponent implements OnInit {
 
   breeders$!: Observable<Breeder[]>;
   private searchTerms = new Subject<string>();
-
   breeder!: Breeder;
   breeders: Breeder[] = [];
 
-  constructor(private breederService: BreederService, private reptileService: ReptileService, public dialog: MatDialog) {}
-
-  // Push a search term into the observable stream.
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
+  constructor(private breederService: BreederService,
+              private reptileService: ReptileService,
+              public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.breeders$ = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
       debounceTime(300),
-
-      // ignore new term if same as previous term
       distinctUntilChanged(),
-
-      // switch to new search observable each time the term changes
       switchMap((term: string) => this.breederService.searchBreeder(term)),
     );
   }
 
-  openEditBreederDialog(id: string): void {
+  search(term: string): void {
+    this.searchTerms.next(term);
+  }
 
+  getBreedersWithoutUnbekannt(): void {
+    this.breederService.getBreeders()
+      .subscribe(breeders => {
+        this.breeders = breeders;
+        this.breeders.splice(0,1);
+      });
+  }
+
+  openEditBreederDialog(id: string): void {
     this.breederService.getBreeder(id)
       .subscribe(breeder => {
         this.breeder = breeder;
@@ -84,18 +84,9 @@ export class BreederSearchComponent implements OnInit {
                   }
                 })
             });
-            this.getBreeders();
+            this.getBreedersWithoutUnbekannt();
           }
         });
       });
   }
-
-  getBreeders(): void {
-    this.breederService.getBreeders()
-      .subscribe(breeders => {
-        this.breeders = breeders;
-        this.breeders.splice(0,1);
-      });
-  }
-
 }

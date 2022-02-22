@@ -20,20 +20,24 @@ export class ReptileDashboardComponent implements OnInit {
   reptile!: Reptile;
   feeding!: Feeding;
 
-  constructor(private reptileService: ReptileService, public dialog: MatDialog) {
-
-  }
+  constructor(private reptileService: ReptileService,
+              public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getReptiles()
   }
-
 
   getReptiles(): void {
     this.reptileService.getReptiles()
       .subscribe(reptiles => {
         this.reptiles = reptiles;
       });
+  }
+
+  updateReptileStorage():void{
+    this.reptileService.getReptiles().subscribe(reptiles =>{
+      localStorage.setItem('reptiles', JSON.stringify(reptiles))
+    });
   }
 
   add(reptile: Reptile): void {
@@ -79,7 +83,7 @@ export class ReptileDashboardComponent implements OnInit {
           result.date = new Date().toLocaleDateString();
         }
         else{
-          result.date = result.date.toDate().toLocaleDateString()
+          result.date = result.date.toLocaleDateString();
         }
         if(result.type === undefined){
           result.type = '-';
@@ -91,6 +95,7 @@ export class ReptileDashboardComponent implements OnInit {
           .subscribe(reptile => {
             reptile.feedings.push(Object.assign({}, result))
             this.reptileService.updateReptile(reptile).subscribe();
+            this.updateReptileStorage();
           })
       }
     });
@@ -107,15 +112,16 @@ export class ReptileDashboardComponent implements OnInit {
           result.date = new Date().toLocaleDateString();
         }
         else{
-          result.date = result.date.toDate().toLocaleDateString()
+          result.date = result.date.toLocaleDateString();
         }
         if(result.weight === undefined){
           result.weight = 0.0;
         }
         this.reptileService.getReptile(reptileid)
           .subscribe(reptile => {
-            reptile.weight.push(Object.assign({}, result))
+            reptile.weight.push(Object.assign({}, result));
             this.reptileService.updateReptile(reptile).subscribe();
+            this.updateReptileStorage();
           })
       }
     });
@@ -132,15 +138,16 @@ export class ReptileDashboardComponent implements OnInit {
           result.date = new Date().toLocaleDateString();
         }
         else{
-          result.date = result.date.toDate().toLocaleDateString()
+          result.date = result.date.toLocaleDateString();
         }
         if(result.note === undefined){
           result.note = 'Kein Eintrag';
         }
         this.reptileService.getReptile(reptileid)
           .subscribe(reptile => {
-            reptile.notes.push(Object.assign({}, result))
+            reptile.notes.push(Object.assign({}, result));
             this.reptileService.updateReptile(reptile).subscribe();
+            this.updateReptileStorage();
           })
       }
     });

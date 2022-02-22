@@ -20,14 +20,20 @@ export class NoteTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: any[] = ['select', 'date', 'note'];
   dataSource!:MatTableDataSource<Note>
-
   selection = new SelectionModel<Note>(true, []);
 
-  constructor(public dialog: MatDialog, private reptileService: ReptileService) { }
+  constructor(public dialog: MatDialog,
+              private reptileService: ReptileService) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Note>(this.reptile.notes);
     this.dataSource.paginator = this.paginator;
+  }
+
+  updateReptileStorage():void{
+    this.reptileService.getReptiles().subscribe(reptiles =>{
+      localStorage.setItem('reptiles', JSON.stringify(reptiles))
+    });
   }
 
   openAddNoteDialog(reptileid : any): void{
@@ -41,17 +47,18 @@ export class NoteTableComponent implements OnInit {
           result.date = new Date().toLocaleDateString();
         }
         else{
-          result.date = result.date.toDate().toLocaleDateString()
+          result.date = result.date.toLocaleDateString();
         }
         if(result.note === undefined){
           result.note = 'Kein Eintrag';
         }
         this.reptileService.getReptile(reptileid)
           .subscribe(reptile => {
-            reptile.notes.push(Object.assign({}, result))
+            reptile.notes.push(Object.assign({}, result));
             this.reptileService.updateReptile(reptile).subscribe();
-            this.reptile.notes.push(result)
-            this.myTable.renderRows()
+            this.reptile.notes.push(result);
+            this.updateReptileStorage();
+            this.myTable.renderRows();
           })
       }
     });
@@ -64,17 +71,15 @@ export class NoteTableComponent implements OnInit {
           this.dataSource.data.splice(j,1)
           this.reptileService.getReptile(reptileid)
             .subscribe(reptile => {
-              reptile.notes = this.dataSource.data
+              reptile.notes = this.dataSource.data;
               this.reptileService.updateReptile(reptile).subscribe();
+              this.updateReptileStorage()
               this.myTable.renderRows()
             })
         }
       }
     }
   }
-
-
-
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;

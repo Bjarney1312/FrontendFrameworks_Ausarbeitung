@@ -18,14 +18,15 @@ export class BreederDashboardComponent implements OnInit {
   breeders: Breeder[] = [];
   breeder!: Breeder;
 
-  constructor(private breederService: BreederService, private reptileService: ReptileService, public dialog: MatDialog) {
-  }
+  constructor(private breederService: BreederService,
+              private reptileService: ReptileService,
+              public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.getBreeders();
+    this.getBreedersWithoutUnbekannt();
   }
 
-  getBreeders(): void {
+  getBreedersWithoutUnbekannt(): void {
     this.breederService.getBreeders()
       .subscribe(breeders => {
         this.breeders = breeders;
@@ -33,14 +34,10 @@ export class BreederDashboardComponent implements OnInit {
       });
   }
 
-  add(breeder: Breeder): void {
-    if (!breeder) {
-      return;
-    }
-    this.breederService.addBreeder(breeder as Breeder)
-      .subscribe(breeder => {
-        this.breeders.push(breeder);
-      });
+  updateBreederLocalStorage():void{
+    this.breederService.getBreeders().subscribe(breeders =>{
+      localStorage.setItem('breeders', JSON.stringify(breeders))
+    });
   }
 
   openAddBreederDialog(): void {
@@ -48,33 +45,34 @@ export class BreederDashboardComponent implements OnInit {
       width: '560px',
       data: {breeder: {}}, disableClose:true
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
         this.breeder = result;
-        this.add(this.breeder);
-        this.getBreeders();
+        this.breederService.addBreeder(result as Breeder)
+          .subscribe(breeder => {
+            this.breeders.push(breeder);
+            this.updateBreederLocalStorage();
+          });
+        this.getBreedersWithoutUnbekannt();
       }
     });
   }
 
   openDeleteBreederDialog(id: string): void {
-
     const dialogRef = this.dialog.open(DialogDeleteBreederComponent, {
       width: '300px',
       data: {}, disableClose:true
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
         this.breederService.deleteBreeder(id).subscribe();
-        this.getBreeders()
+        this.getBreedersWithoutUnbekannt()
+        this.updateBreederLocalStorage();
       }
     });
   }
 
   openEditBreederDialog(id: string): void {
-
     this.breederService.getBreeder(id)
       .subscribe(breeder => {
         this.breeder = breeder;
@@ -104,18 +102,22 @@ export class BreederDashboardComponent implements OnInit {
             this.breeder.place = result.place;
             this.breeder.email = result.email;
             this.breeder.phone = result.phone;
-            this.breederService.updateBreeder(this.breeder).subscribe(event => {
+            this.breederService.updateBreeder(this.breeder).subscribe(result => {
               this.reptileService.getReptiles()
                 .subscribe(reptiles =>{
                   for(let i = 0; i<reptiles.length; i++){
                     if(reptiles[i].breeder.id === this.breeder.id){
                       reptiles[i].breeder = this.breeder;
                       this.reptileService.updateReptile(reptiles[i]).subscribe()
+                      this.reptileService.getReptiles().subscribe(reptiles =>{
+                        localStorage.setItem('reptiles', JSON.stringify(reptiles))
+                      });
                     }
                   }
                 })
             });
-            this.getBreeders();
+            this.getBreedersWithoutUnbekannt();
+            this.updateBreederLocalStorage();
           }
         });
       });

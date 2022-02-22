@@ -134,21 +134,15 @@ export class InMemoryDataService implements InMemoryDbService {
     reptiles[0].notes.push(notes[0]);
     reptiles[0].notes.push(notes[1]);
 
-    console.log("Ähm: " + localStorage.getItem('reptiles'))
     if(localStorage.getItem('reptiles') !== null){
-      console.log("Ich hole mir die alten Daten")
       breeders = JSON.parse(<string>localStorage.getItem('breeders')) || []
       reptiles = JSON.parse(<string>localStorage.getItem('reptiles')) || []
       return {reptiles, breeders};
     }
     else{
-      console.log("Ich mache neue  Daten")
       localStorage.setItem('reptiles', JSON.stringify(reptiles))
       localStorage.setItem('breeders', JSON.stringify(breeders))
       return {reptiles, breeders};
     }
-
-
-
   }
 }

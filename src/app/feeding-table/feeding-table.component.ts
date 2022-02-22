@@ -21,16 +21,20 @@ export class FeedingTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: any[] = ['select', 'date', 'type', 'weight'];
   dataSource!:MatTableDataSource<Feeding>
-
   selection = new SelectionModel<Feeding>(true, []);
 
-  constructor(public dialog: MatDialog, private reptileService: ReptileService) { }
-
-
+  constructor(public dialog: MatDialog,
+              private reptileService: ReptileService) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Feeding>(this.reptile.feedings);
     this.dataSource.paginator = this.paginator;
+  }
+
+  updateReptileStorage():void{
+    this.reptileService.getReptiles().subscribe(reptiles =>{
+      localStorage.setItem('reptiles', JSON.stringify(reptiles))
+    });
   }
 
   openAddFeedingDialog(reptileid : any): void {
@@ -44,18 +48,18 @@ export class FeedingTableComponent implements OnInit {
           weight: 0,
         },
       }, disableClose:true});
+
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
         if(result.date === undefined){
           result.date = new Date().toLocaleDateString();
         }
         else{
-          result.date = result.date.toDate().toLocaleDateString()
+          result.date = result.date.toLocaleDateString();
         }
         if(result.type === undefined){
           result.type = '-';
         }
-
         if(result.weight === undefined){
           result.weight = 0.0;
         }
@@ -63,9 +67,10 @@ export class FeedingTableComponent implements OnInit {
         this.reptileService.getReptile(reptileid)
           .subscribe(reptile => {
             reptile.feedings.push(Object.assign({}, result))
+            this.reptile.feedings.push(result);
             this.reptileService.updateReptile(reptile).subscribe();
-            this.reptile.feedings.push(result)
-            this.myTable.renderRows()
+            this.updateReptileStorage();
+            this.myTable.renderRows();
           })
       }
     });
@@ -80,15 +85,13 @@ export class FeedingTableComponent implements OnInit {
             .subscribe(reptile => {
               reptile.feedings = this.dataSource.data
               this.reptileService.updateReptile(reptile).subscribe();
+              this.updateReptileStorage();
               this.myTable.renderRows()
             })
         }
       }
     }
   }
-
-
-
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;

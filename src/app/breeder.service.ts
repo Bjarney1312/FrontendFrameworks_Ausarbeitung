@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Breeder} from "./data/breeder";
+import { Breeder } from "./data/breeder";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class BreederService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  private breederUrl = 'api/breeders';  // URL to web api
+  private breederUrl = 'api/breeders';
 
   constructor(private http: HttpClient,) { }
 
@@ -21,8 +21,7 @@ export class BreederService {
   getBreeders(): Observable<Breeder[]> {
     return this.http.get<Breeder[]>(this.breederUrl)
       .pipe(
-        // tap(_ => this.log('fetched heroes')),
-        catchError(this.handleError<Breeder[]>('getHeroes', []))
+        catchError(this.handleError<Breeder[]>('getBreeders', []))
       );
   }
 
@@ -30,16 +29,14 @@ export class BreederService {
   getBreeder(id: string): Observable<Breeder> {
     const url = `${this.breederUrl}/${id}`;
     return this.http.get<Breeder>(url).pipe(
-      // tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Breeder>(`getHero id=${id}`))
+      catchError(this.handleError<Breeder>(`getBreeder id=${id}`))
     );
   }
 
   /** PUT: update the hero on the server */
   updateBreeder(breeder: Breeder): Observable<any> {
     return this.http.put(this.breederUrl, breeder, this.httpOptions).pipe(
-      // tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('updateBreeder'))
     );
   }
 
@@ -47,8 +44,7 @@ export class BreederService {
   addBreeder(breeder: Breeder): Observable<Breeder> {
     console.log('TEST: Add Reptile wird ausgeführt' + breeder.firstName);
     return this.http.post<Breeder>(this.breederUrl, breeder, this.httpOptions).pipe(
-      // tap((newHero: Reptile) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<Breeder>('addHero'))
+      catchError(this.handleError<Breeder>('addBreeder'))
     );
   }
 
@@ -57,29 +53,19 @@ export class BreederService {
     const url = `${this.breederUrl}/${id}`;
 
     return this.http.delete<Breeder>(url, this.httpOptions).pipe(
-      // tap(_ => this.log(`deleted hero id=${id}`)),
-      catchError(this.handleError<Breeder>('deleteHero'))
+      catchError(this.handleError<Breeder>('deleteBreeder'))
     );
   }
 
   /* GET heroes whose name contains search term */
   searchBreeder(term: string): Observable<Breeder[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
       return of([]);
     }
     return this.http.get<Breeder[]>(`${this.breederUrl}/?lastName=${term}`).pipe(
-      // tap(x => x.length ?
-      //   this.log(`found heroes matching "${term}"`) :
-      //   this.log(`no heroes matching "${term}"`)),
-      catchError(this.handleError<Breeder[]>('searchHeroes', []))
+      catchError(this.handleError<Breeder[]>('searchBreeders', []))
     );
   }
-
-  // /** Log a HeroService message with the MessageService */
-  // private log(message: string) {
-  //   this.messageService.add(`HeroService: ${message}`);
-  // }
 
   /**
    * Handle Http operation that failed.
@@ -90,14 +76,7 @@ export class BreederService {
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
+      console.error(error);
       return of(result as T);
     };
   }

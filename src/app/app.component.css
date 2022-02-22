@@ -22,17 +22,17 @@
   font-size: xx-large;
 }
 
-.example-spacer {
+#spacer {
   flex: 1 1 auto;
 }
 
-.example-icon{
+#logout-icon{
   background: none;
   color: white;
   border-style: none;
 }
 
-.example-icon:hover {
+#logout-icon:hover {
   background-color: transparent;
   background-repeat: no-repeat;
   cursor:pointer;

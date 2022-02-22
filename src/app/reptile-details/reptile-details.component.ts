@@ -36,8 +36,13 @@ export class ReptileDetailsComponent implements OnInit {
         });
   }
 
-  openEditReptileDialog(): void {
+  updateReptileStorage():void{
+    this.reptileService.getReptiles().subscribe(reptiles =>{
+      localStorage.setItem('reptiles', JSON.stringify(reptiles))
+    });
+  }
 
+  openEditReptileDialog(): void {
     const dialogRef = this.dialog.open(DialogEditReptileComponent, {
       width: '560px',
       data: {
@@ -62,17 +67,14 @@ export class ReptileDetailsComponent implements OnInit {
         this.reptile.morph = result.morph;
         this.reptile.breeder = result.breeder;
         this.reptile.imageURL = result.imageURL;
-        this.reptileService.updateReptile(this.reptile).subscribe();
 
-        this.reptileService.getReptiles().subscribe(reptiles =>{
-          localStorage.setItem('reptiles', JSON.stringify(reptiles))
-        });
+        this.reptileService.updateReptile(this.reptile).subscribe();
+        this.updateReptileStorage();
       }
     });
   }
 
   openDeleteDialog(): void {
-
     const id = String(this.route.snapshot.paramMap.get('id'));
 
     const dialogRef = this.dialog.open(DialogDeleteReptileComponent, {
@@ -83,6 +85,7 @@ export class ReptileDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result !== undefined){
         this.reptileService.deleteReptile(id).subscribe();
+        this.updateReptileStorage();
         this.location.back()
       }
     });

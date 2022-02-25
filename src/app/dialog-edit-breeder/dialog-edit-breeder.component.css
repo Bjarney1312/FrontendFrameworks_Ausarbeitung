@@ -1,13 +1,13 @@
-.edit-breeder-dialog-input{
+.edit-breeder-dialog-input {
   width: 250px;
   margin-right: 10px;
 }
 
-.edit-breeder-dialog-input-full{
+.edit-breeder-dialog-input-full {
   width: 513px;
 }
 
-.edit-breeder-dialog-p{
+.edit-breeder-dialog-p {
   margin-bottom: 0px;
 }
 
@@ -23,6 +23,6 @@
   background-color: dimgrey !important;;
 }
 
-.button-add.disabled{
+.button-add.disabled {
   color: white;
 }

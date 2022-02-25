@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Breeder } from "./data/breeder";
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Breeder} from "./data/breeder";
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,15 @@ import { Breeder } from "./data/breeder";
 export class BreederService {
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   private breederUrl = 'api/breeders';
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient,) {
+  }
 
-  /** GET heroes from the server */
+  /** GET - Request: Holt alle Züchter vom Server */
   getBreeders(): Observable<Breeder[]> {
     return this.http.get<Breeder[]>(this.breederUrl)
       .pipe(
@@ -25,7 +26,7 @@ export class BreederService {
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  /** GET - Request: Holt ein Züchter mit einer bestimmten ID vom Server */
   getBreeder(id: string): Observable<Breeder> {
     const url = `${this.breederUrl}/${id}`;
     return this.http.get<Breeder>(url).pipe(
@@ -33,14 +34,14 @@ export class BreederService {
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT - Request: Aktualisiert einen Züchter */
   updateBreeder(breeder: Breeder): Observable<any> {
     return this.http.put(this.breederUrl, breeder, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateBreeder'))
     );
   }
 
-  /** POST: add a new hero to the server */
+  /** POST - Request: Fügt dem Server einen neuen Züchter hinzu */
   addBreeder(breeder: Breeder): Observable<Breeder> {
     console.log('TEST: Add Reptile wird ausgeführt' + breeder.firstName);
     return this.http.post<Breeder>(this.breederUrl, breeder, this.httpOptions).pipe(
@@ -48,7 +49,7 @@ export class BreederService {
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE - Request: Entfernt einen Züchter vom Server */
   deleteBreeder(id: string): Observable<Breeder> {
     const url = `${this.breederUrl}/${id}`;
 
@@ -57,7 +58,7 @@ export class BreederService {
     );
   }
 
-  /* GET heroes whose name contains search term */
+  /** GET - Request: Sucht nach einem Züchter mit einem bestimmten Nachnamen */
   searchBreeder(term: string): Observable<Breeder[]> {
     if (!term.trim()) {
       return of([]);
@@ -68,11 +69,10 @@ export class BreederService {
   }
 
   /**
-   * Handle Http operation that failed.
-   * Let the app continue.
+   * Handler für fehlgeschlagene HTTP-Requests. Die Applikation wird fortgesetzt.
    *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
+   * @param operation - Name der Operation die fehlgeschlagen ist.
+   * @param result - Optional als Ergebnis für das Observable
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

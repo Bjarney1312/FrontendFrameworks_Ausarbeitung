@@ -1,32 +1,29 @@
-.add-reptile-dialog-input{
+.add-reptile-dialog-input {
   width: 250px;
 }
 
-.add-reptile-dialog-input{
+.add-reptile-dialog-input {
   width: 250px;
   margin-right: 10px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
-  /*change color of label*/
   color: black !important;
 }
 
 ::ng-deep.mat-form-field-underline {
-  /*change color of underline*/
   background-color: dimgrey !important;
 }
 
 ::ng-deep.mat-form-field-ripple {
-  /*change color of underline when focused*/
   background-color: dimgrey !important;;
 }
 
-.add-reptile-dialog-input-image{
+.add-reptile-dialog-input-image {
   width: 513px;
 }
 
-.button-add.disabled{
+.button-add.disabled {
   color: white;
 }
 

@@ -24,18 +24,18 @@
           </p>
           <p>
             <span class="card-content-subpoints">Gewicht: </span>
-            {{reptile.weight[reptile.weight.length-1]? reptile.weight[reptile.weight.length-1].weight : '-'}} g
+            {{reptile.weight[reptile.weight.length - 1] ? reptile.weight[reptile.weight.length - 1].weight : '-'}} g
           </p>
           <p>
             <span class="card-content-subpoints">Letzte Fütterung:</span>
-            {{reptile.feedings[reptile.feedings.length-1]? reptile.feedings[reptile.feedings.length-1].date : '-'}}
+            {{reptile.feedings[reptile.feedings.length - 1] ? reptile.feedings[reptile.feedings.length - 1].date : '-'}}
           </p>
         </section>
 
         <section class="card-content-bottom">
           <p>
             <span class="card-content-subpoints">Notiz: </span>
-            {{reptile.notes[reptile.notes.length-1]? reptile.notes[reptile.notes.length-1].note : '-'}}
+            {{reptile.notes[reptile.notes.length - 1] ? reptile.notes[reptile.notes.length - 1].note : '-'}}
           </p>
         </section>
 
@@ -43,12 +43,14 @@
 
       <mat-card-actions align="end">
 
-        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button" (click)="openEditReptileDialog()">
-          <mat-icon> edit </mat-icon>
+        <button mat-mini-fab class="reptile-buttons" color="reptiNoteTheme" aria-label="Details-Button"
+                (click)="openEditReptileDialog()">
+          <mat-icon> edit</mat-icon>
         </button>
 
-        <button mat-mini-fab class="reptile-buttons" color="warn" aria-label="Details-Button" (click)="openDeleteDialog()">
-          <mat-icon> delete </mat-icon>
+        <button mat-mini-fab class="reptile-buttons" color="warn" aria-label="Details-Button"
+                (click)="openDeleteDialog()">
+          <mat-icon> delete</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
@@ -61,7 +63,7 @@
           <mat-icon class="example-tab-icon">restaurant_menu</mat-icon>
           Fütterungen
         </ng-template>
-       <app-feeding-table [reptile]="reptile"></app-feeding-table>
+        <app-feeding-table [reptile]="reptile"></app-feeding-table>
       </mat-tab>
 
       <mat-tab>

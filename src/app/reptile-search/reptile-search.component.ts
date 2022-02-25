@@ -1,26 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-
-import {
-  debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators';
-
-import { Reptile } from '../data/reptile';
-import { ReptileService } from '../reptile.service';
+import {Component, OnInit} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {Reptile} from '../data/reptile';
+import {ReptileService} from '../reptile.service';
 
 @Component({
   selector: 'app-reptile-search',
   templateUrl: './reptile-search.component.html',
-  styleUrls: [ './reptile-search.component.css' ]
+  styleUrls: ['./reptile-search.component.css']
 })
 export class ReptileSearchComponent implements OnInit {
+
   reptiles$!: Observable<Reptile[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private reptileService: ReptileService) {}
-
-  search(term: string): void {
-    this.searchTerms.next(term);
+  constructor(private reptileService: ReptileService) {
   }
 
   ngOnInit(): void {
@@ -29,5 +23,9 @@ export class ReptileSearchComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((term: string) => this.reptileService.searchReptiles(term)),
     );
+  }
+
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 }

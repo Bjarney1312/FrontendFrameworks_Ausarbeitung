@@ -1,8 +1,8 @@
-body{
+body {
   background: whitesmoke;
 }
 
-.test{
+.test {
   display: grid;
   grid-template-areas:
     "details tables";
@@ -14,44 +14,44 @@ mat-card {
   margin: 20px;
 }
 
-.reptile-buttons{
+.reptile-buttons {
   margin: 5px;
 }
 
-.reptile-details-card{
+.reptile-details-card {
   grid-area: details;
   border-right: solid 1px gray;
   margin-right: 20px;
   margin-top: 10px;
 }
 
-.details-table-area{
+.details-table-area {
   grid-area: tables;
 }
 
-.details-card{
+.details-card {
 
 }
 
-.mat-card-title{
+.mat-card-title {
   margin-top: 20px;
   margin-left: -35px;
   font-size: xx-large;
   padding-bottom: 20px;
 }
 
-.mat-card-subtitle{
+.mat-card-subtitle {
   margin-left: -35px;
   font-size: large;
 }
 
-.mat-card-image{
+.mat-card-image {
   width: 95%;
   margin-left: 15px;
   max-height: 800px;
 }
 
-.mat-card-content{
+.mat-card-content {
   padding-top: 30px;
   margin-left: 15px;
   font-size: medium;
@@ -63,24 +63,24 @@ mat-card {
   grid-template-columns: 50% 50%;
 }
 
-.card-content-subpoints{
+.card-content-subpoints {
   font-weight: bold;
   color: dimgrey;
 }
 
-.card-content-left{
+.card-content-left {
   grid-area: info;
 }
 
-.card-content-right{
+.card-content-right {
   grid-area: dates;
 }
 
-.card-content-bottom{
+.card-content-bottom {
   margin-top: 10px;
 }
 
-mat-tab-group{
+mat-tab-group {
   width: 95%;
   margin: 20px;
 }

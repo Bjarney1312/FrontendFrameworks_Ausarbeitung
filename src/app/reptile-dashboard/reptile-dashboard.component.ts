@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import { ReptileService } from '../reptile.service';
+import {ReptileService} from '../reptile.service';
 import {Reptile} from "../data/reptile";
-import {MatDialog} from "@angular/material/dialog";
+import {Feeding} from "../data/feeding";
 import {DialogAddReptileComponent} from "../dialog-add-reptile/dialog-add-reptile.component";
 import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feeding.component";
-import {Feeding} from "../data/feeding";
 import {DialogAddWeightComponent} from "../dialog-add-weight/dialog-add-weight.component";
 import {DialogAddNoteComponent} from "../dialog-add-note/dialog-add-note.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-reptile-dashboard',
@@ -21,11 +21,16 @@ export class ReptileDashboardComponent implements OnInit {
   feeding!: Feeding;
 
   constructor(private reptileService: ReptileService,
-              public dialog: MatDialog) {}
+              public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.getReptiles()
   }
+
+  /*---------------------------------------------------------------------------------------------------
+                                           Funktionen
+  -----------------------------------------------------------------------------------------------------*/
 
   getReptiles(): void {
     this.reptileService.getReptiles()
@@ -34,8 +39,8 @@ export class ReptileDashboardComponent implements OnInit {
       });
   }
 
-  updateReptileStorage():void{
-    this.reptileService.getReptiles().subscribe(reptiles =>{
+  updateReptileStorage(): void {
+    this.reptileService.getReptiles().subscribe(reptiles => {
       localStorage.setItem('reptiles', JSON.stringify(reptiles))
     });
   }
@@ -54,17 +59,17 @@ export class ReptileDashboardComponent implements OnInit {
   openAddReptileDialog(): void {
     const dialogRef = this.dialog.open(DialogAddReptileComponent, {
       width: '560px',
-      data: {reptile: {}}, disableClose:true
+      data: {reptile: {}}, disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined){
+      if (result !== undefined) {
 
         this.reptile = result;
         this.reptile.feedings = [];
         this.reptile.weight = [];
         this.reptile.notes = [];
-        if(result.imageURL === undefined){
+        if (result.imageURL === undefined) {
           this.reptile.imageURL = 'https://icon-library.com/images/reptile-icon/reptile-icon-26.jpg'
         }
         this.add(this.reptile);
@@ -72,23 +77,22 @@ export class ReptileDashboardComponent implements OnInit {
     });
   }
 
-  openAddFeedingDialog(reptileid : any): void {
+  openAddFeedingDialog(reptileid: any): void {
     const dialogRef = this.dialog.open(DialogAddFeedingComponent, {
       width: '300px',
-      data: {feeding: {}}, disableClose:true
+      data: {feeding: {}}, disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined){
-        if(result.date === undefined){
+      if (result !== undefined) {
+        if (result.date === undefined) {
           result.date = new Date().toLocaleDateString();
-        }
-        else{
+        } else {
           result.date = result.date.toLocaleDateString();
         }
-        if(result.type === undefined){
+        if (result.type === undefined) {
           result.type = '-';
         }
-        if(result.weight === undefined){
+        if (result.weight === undefined) {
           result.weight = 0.0;
         }
         this.reptileService.getReptile(reptileid)
@@ -101,20 +105,19 @@ export class ReptileDashboardComponent implements OnInit {
     });
   }
 
-  openAddWeightDialog(reptileid : any): void {
+  openAddWeightDialog(reptileid: any): void {
     const dialogRef = this.dialog.open(DialogAddWeightComponent, {
       width: '300px',
-      data: {weight: {}}, disableClose:true
+      data: {weight: {}}, disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined){
-        if(result.date === undefined){
+      if (result !== undefined) {
+        if (result.date === undefined) {
           result.date = new Date().toLocaleDateString();
-        }
-        else{
+        } else {
           result.date = result.date.toLocaleDateString();
         }
-        if(result.weight === undefined){
+        if (result.weight === undefined) {
           result.weight = 0.0;
         }
         this.reptileService.getReptile(reptileid)
@@ -127,20 +130,19 @@ export class ReptileDashboardComponent implements OnInit {
     });
   }
 
-  openAddNoteDialog(reptileid : any): void {
+  openAddNoteDialog(reptileid: any): void {
     const dialogRef = this.dialog.open(DialogAddNoteComponent, {
       width: '300px',
-      data: {weight: {}}, disableClose:true
+      data: {weight: {}}, disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined){
-        if(result.date === undefined){
+      if (result !== undefined) {
+        if (result.date === undefined) {
           result.date = new Date().toLocaleDateString();
-        }
-        else{
+        } else {
           result.date = result.date.toLocaleDateString();
         }
-        if(result.note === undefined){
+        if (result.note === undefined) {
           result.note = 'Kein Eintrag';
         }
         this.reptileService.getReptile(reptileid)

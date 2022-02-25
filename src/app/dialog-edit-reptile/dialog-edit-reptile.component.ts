@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Reptile} from "../data/reptile";
 import {FormControl, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {Reptile} from "../data/reptile";
 import {Breeder} from "../data/breeder";
 import {BreederService} from "../breeder.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dialog-edit-reptile',
@@ -12,10 +12,13 @@ import {BreederService} from "../breeder.service";
 })
 export class DialogEditReptileComponent implements OnInit {
 
-  reptiles: Reptile[] = [];
   orderControl = new FormControl('', Validators.required);
   nameControl = new FormControl('', Validators.required);
   typeControl = new FormControl('', Validators.required);
+
+  reptiles: Reptile[] = [];
+  breeders: Breeder[] = [];
+
   orders: String[] = [
     'Schlange',
     'Echse',
@@ -30,7 +33,6 @@ export class DialogEditReptileComponent implements OnInit {
     'Weiblich',
     'Unbekannt'
   ]
-  breeders: Breeder[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditReptileComponent>,
@@ -42,21 +44,22 @@ export class DialogEditReptileComponent implements OnInit {
     this.getBreeders()
   }
 
+  /*---------------------------------------------------------------------------------------------------
+                                           Funktionen
+  -----------------------------------------------------------------------------------------------------*/
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  getBreeders(): void{
+  getBreeders(): void {
     this.breederService.getBreeders().subscribe(breeders => {
       this.breeders = breeders;
-      // Breeder wird richtig übergeben, muss das aber trotzdem nochmal machen, damit der
-      // Züchter auch vorausgewählt im Bearbeiten-Dialog ist ?!?!?!
-      for(let i = 0; i<breeders.length; i++){
-        if(breeders[i].id === this.data.breeder.id){
+      for (let i = 0; i < breeders.length; i++) {
+        if (breeders[i].id === this.data.breeder.id) {
           this.data.breeder = breeders[i];
         }
       }
     })
   }
-
 }

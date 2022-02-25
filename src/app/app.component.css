@@ -1,9 +1,9 @@
-.toolbar{
+.toolbar {
   color: white;
   background-color: darkolivegreen;
 }
 
-.links{
+.links {
   color: white;
   padding-left: 100px;
   padding-top: 3px;
@@ -18,7 +18,7 @@
   color: white;
 }
 
-#applikation_title{
+#applikation_title {
   font-size: xx-large;
 }
 
@@ -26,7 +26,7 @@
   flex: 1 1 auto;
 }
 
-#logout-icon{
+#logout-icon {
   background: none;
   color: white;
   border-style: none;
@@ -35,21 +35,21 @@
 #logout-icon:hover {
   background-color: transparent;
   background-repeat: no-repeat;
-  cursor:pointer;
+  cursor: pointer;
   font-size: 1em;
 }
 
-.mat-reptiNoteTheme{
+.mat-reptiNoteTheme {
   background-color: darkolivegreen;
   color: white;
 }
 
-.mat-reptiNoteThemeBlue{
+.mat-reptiNoteThemeBlue {
   background-color: royalblue;
   color: white;
 }
 
-.mat-reptiNoteThemeRed{
+.mat-reptiNoteThemeRed {
   background-color: #f44336;
   color: white;
 }

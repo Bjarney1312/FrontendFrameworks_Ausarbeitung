@@ -1,4 +1,4 @@
-export interface Feeding{
+export interface Feeding {
   id: string;
   date: string;
   type: string;

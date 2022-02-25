@@ -4,38 +4,38 @@ table {
   margin-right: 20px;
 }
 
-mat-paginator{
+mat-paginator {
   width: 95%;
   margin-left: 20px;
 }
 
-#table-header{
+#table-header {
   display: grid;
   width: 97%;
   grid-template-areas: "buttons filter";
   grid-template-columns: 3fr 1fr;
 }
 
-#table-filter{
+#table-filter {
   grid-area: filter;
   margin-left: 40px;
   margin-top: 10px;
 }
 
-#table-buttons{
+#table-buttons {
   grid-area: buttons;
 }
 
-.add-feeding-button{
+.add-feeding-button {
   margin: 20px;
 }
 
-.mat-reptiNoteThemeRed{
+.mat-reptiNoteThemeRed {
   background-color: #f44336;
   color: white;
 }
 
-.mat-reptiNoteTheme{
+.mat-reptiNoteTheme {
   background-color: darkolivegreen;
   color: white;
 }

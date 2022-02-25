@@ -1,13 +1,13 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Reptile} from "../data/reptile";
-import {MatTable, MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
+import {Reptile} from "../data/reptile";
 import {Weight} from "../data/weight";
-import {MatDialog} from "@angular/material/dialog";
 import {ReptileService} from "../reptile.service";
-import {MatPaginator} from "@angular/material/paginator";
 import {DialogAddWeightComponent} from "../dialog-add-weight/dialog-add-weight.component";
+import {MatTable, MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
 import {MatSort} from "@angular/material/sort";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-weight-table',
@@ -17,15 +17,18 @@ import {MatSort} from "@angular/material/sort";
 export class WeightTableComponent implements OnInit, AfterViewInit {
 
   @Input() reptile!: Reptile;
+
   @ViewChild('myTable') myTable!: MatTable<Weight>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
   displayedColumns: any[] = ['select', 'date', 'weight'];
-  dataSource!:MatTableDataSource<Weight>
+  dataSource!: MatTableDataSource<Weight>
   selection = new SelectionModel<Weight>(true, []);
 
   constructor(public dialog: MatDialog,
-              private reptileService: ReptileService) {}
+              private reptileService: ReptileService) {
+  }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Weight>(this.reptile.weight);
@@ -36,35 +39,29 @@ export class WeightTableComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  /*---------------------------------------------------------------------------------------------------
+                                          Funktionen
+  -----------------------------------------------------------------------------------------------------*/
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-
-  updateReptileStorage():void{
-    this.reptileService.getReptiles().subscribe(reptiles =>{
+  updateReptileStorage(): void {
+    this.reptileService.getReptiles().subscribe(reptiles => {
       localStorage.setItem('reptiles', JSON.stringify(reptiles))
     });
   }
 
-  openAddWeightDialog(reptileid : any): void {
+  openAddWeightDialog(reptileid: any): void {
     const dialogRef = this.dialog.open(DialogAddWeightComponent, {
       width: '300px',
-      data: {weights: {}}, disableClose:true
+      data: {weights: {}}, disableClose: true
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined){
-        if(result.date === undefined){
+      if (result !== undefined) {
+        if (result.date === undefined) {
           result.date = new Date().toLocaleDateString();
-        }
-        else{
+        } else {
           result.date = result.date.toLocaleDateString();
         }
-        if(result.weight === undefined){
+        if (result.weight === undefined) {
           result.weight = 0.0;
         }
         this.reptileService.getReptile(reptileid)
@@ -79,11 +76,11 @@ export class WeightTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteWeight(reptileid : any):void{
-    for (let i = 0; i<this.selection.selected.length; i++){
-      for(let j = 0; j<this.dataSource.data.length; j++){
-        if(this.selection.selected[i].id === this.dataSource.data[j].id){
-          this.dataSource.data.splice(j,1);
+  deleteWeight(reptileid: any): void {
+    for (let i = 0; i < this.selection.selected.length; i++) {
+      for (let j = 0; j < this.dataSource.data.length; j++) {
+        if (this.selection.selected[i].id === this.dataSource.data[j].id) {
+          this.dataSource.data.splice(j, 1);
           this.reptileService.getReptile(reptileid)
             .subscribe(reptile => {
               reptile.weight = this.dataSource.data
@@ -96,28 +93,45 @@ export class WeightTableComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /*---------------------------------------------------------------------------------------------------
+                                          Tabellen-Filter
+  -----------------------------------------------------------------------------------------------------*/
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  /*---------------------------------------------------------------------------------------------------
+                                          Tabellen-Selection
+  -----------------------------------------------------------------------------------------------------*/
+
+  /** Prüft ob alle Zeilen in der Tabelle selektiert sind oder nicht.*/
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  /** Wählt alle Zeilen aus, sofern noch nicht alle Zeilen selektiert sind. Andernfalls werden
+   *  alle Zeilen deselektiert.*/
   masterToggle() {
     if (this.isAllSelected()) {
       this.selection.clear();
       return;
     }
-
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
+  /** Die Bezeichnung für das Kontrollkästchen in der übergebenen Zeile */
   checkboxLabel(row?: Weight): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id}`;
   }
-
 }

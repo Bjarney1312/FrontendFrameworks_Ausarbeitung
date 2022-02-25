@@ -1,41 +1,41 @@
-body{
+body {
   background: whitesmoke;
 }
 
-.reptile-cards{
+.reptile-cards {
   display: inline-flex;
   margin-top: 20px;
 }
 
-mat-card{
-   width: 400px;
-   margin: 10px;
- }
+mat-card {
+  width: 400px;
+  margin: 10px;
+}
 
-.reptiles-menu{
+.reptiles-menu {
   margin-left: 50px;
   margin-right: 70px;
 }
 
-.reptile-buttons{
+.reptile-buttons {
   margin: 5px;
 }
 
-.dashboard-header{
+.dashboard-header {
   display: grid;
   grid-template-areas:
     "a b c d e";
   grid-template-columns: 180px 200px auto 30px 300px;
 }
 
-.dashboard-header h2{
+.dashboard-header h2 {
   grid-area: a;
   margin-top: 20px;
   margin-left: 15px;
   font-size: x-large;
 }
 
-.searchfield{
+.searchfield {
   grid-area: e;
   height: 40px;
   width: 300px;
@@ -44,13 +44,13 @@ mat-card{
   border-color: dimgrey;
 }
 
-.icon-search{
+.icon-search {
   grid-area: d;
   margin-top: 25px;
   padding-left: 40px;
 }
 
-.add-reptile-button{
+.add-reptile-button {
   margin-top: 18px;
   color: white;
   background-color: dimgrey;
@@ -58,7 +58,7 @@ mat-card{
   height: 40px;
 }
 
-.table-row-first{
+.table-row-first {
   color: dimgrey;
   padding-right: 5px;
 }

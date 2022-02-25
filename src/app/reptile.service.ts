@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Reptile } from "./data/reptile";
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Reptile} from "./data/reptile";
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,15 @@ import { Reptile } from "./data/reptile";
 export class ReptileService {
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
   private reptileUrl = 'api/reptiles';
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient,) {
+  }
 
-  /** GET heroes from the server */
+  /** GET - Request: Holt alle Tiere vom Server */
   getReptiles(): Observable<Reptile[]> {
     return this.http.get<Reptile[]>(this.reptileUrl)
       .pipe(
@@ -25,7 +26,7 @@ export class ReptileService {
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  /** GET - Request: Holt ein Tier mit einer bestimmten ID vom Server */
   getReptile(id: string): Observable<Reptile> {
     const url = `${this.reptileUrl}/${id}`;
     return this.http.get<Reptile>(url).pipe(
@@ -33,14 +34,14 @@ export class ReptileService {
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT - Request: Aktualisiert ein Tier auf dem Server */
   updateReptile(reptile: Reptile): Observable<any> {
     return this.http.put(this.reptileUrl, reptile, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateReptile'))
     );
   }
 
-  /** POST: add a new hero to the server */
+  /** POST - Request: Fügt dem Server einen neues Tier hinzu */
   addReptile(reptile: Reptile): Observable<Reptile> {
     console.log('TEST: Add Reptile wird ausgeführt' + reptile.name);
     return this.http.post<Reptile>(this.reptileUrl, reptile, this.httpOptions).pipe(
@@ -48,7 +49,7 @@ export class ReptileService {
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE - Request: Entfernt ein Tier vom Server */
   deleteReptile(id: string): Observable<Reptile> {
     const url = `${this.reptileUrl}/${id}`;
 
@@ -57,7 +58,7 @@ export class ReptileService {
     );
   }
 
-  /* GET heroes whose name contains search term */
+  /** GET - Request: Sucht nach einem Züchter mit einem bestimmten Nachnamen */
   searchReptiles(term: string): Observable<Reptile[]> {
     if (!term.trim()) {
       return of([]);
@@ -68,11 +69,10 @@ export class ReptileService {
   }
 
   /**
-   * Handle Http operation that failed.
-   * Let the app continue.
+   * Handler für fehlgeschlagene HTTP-Requests. Die Applikation wird fortgesetzt.
    *
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
+   * @param operation - Name der Operation die fehlgeschlagen ist.
+   * @param result - Optional als Ergebnis für das Observable
    */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

@@ -1,4 +1,4 @@
-export interface Breeder{
+export interface Breeder {
   id: string;
   companyName: string;
   firstName: string;

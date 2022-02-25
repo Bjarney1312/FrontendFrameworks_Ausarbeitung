@@ -3,11 +3,13 @@
   <div id="table-header">
     <div id="table-buttons">
       <button mat-raised-button (click)="openAddNoteDialog(reptile.id)" class="note-button" color="reptiNoteTheme">
-        <mat-icon> add </mat-icon>  Notiz hinzufügen
+        <mat-icon> add</mat-icon>
+        Notiz hinzufügen
       </button>
 
       <button mat-raised-button (click)="deleteNotes(reptile.id)" class="note-button" color="reptiNoteThemeRed">
-        <mat-icon> remove </mat-icon>  Notiz entfernen
+        <mat-icon> remove</mat-icon>
+        Notiz entfernen
       </button>
     </div>
 
@@ -16,7 +18,6 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Suchbegriff" #input>
     </mat-form-field>
   </div>
-
 
 
   <table #myTable mat-table [dataSource]="dataSource" matSort>
@@ -39,12 +40,12 @@
     </ng-container>
 
     <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Datum </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Datum</th>
       <td mat-cell *matCellDef="let element"> {{element.date}} </td>
     </ng-container>
 
     <ng-container matColumnDef="note">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Notiz </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Notiz</th>
       <td mat-cell *matCellDef="let element"> {{element.note}}</td>
     </ng-container>
 

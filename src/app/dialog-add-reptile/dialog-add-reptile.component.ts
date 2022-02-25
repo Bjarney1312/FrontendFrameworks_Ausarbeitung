@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Reptile} from "../data/reptile";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, Validators} from "@angular/forms";
 import {v4 as uuidv4} from 'uuid';
+import {Reptile} from "../data/reptile";
 import {Breeder} from "../data/breeder";
 import {BreederService} from "../breeder.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-dialog-add-reptile',
@@ -13,10 +13,13 @@ import {BreederService} from "../breeder.service";
 })
 export class DialogAddReptileComponent implements OnInit {
 
-  reptiles: Reptile[] = [];
   orderControl = new FormControl('', Validators.required);
   nameControl = new FormControl('', Validators.required);
   typeControl = new FormControl('', Validators.required);
+
+  reptiles: Reptile[] = [];
+  breeders!: Breeder[];
+
   orders: String[] = [
     'Schlange',
     'Echse',
@@ -31,12 +34,12 @@ export class DialogAddReptileComponent implements OnInit {
     'Weiblich',
     'Unbekannt'
   ]
-  breeders!: Breeder[];
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddReptileComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Reptile,
-    private breederService: BreederService) {}
+    private breederService: BreederService) {
+  }
 
   ngOnInit(): void {
     this.getBreeders();
@@ -44,11 +47,15 @@ export class DialogAddReptileComponent implements OnInit {
     this.data.geschlecht = 'Unbekannt';
   }
 
+  /*---------------------------------------------------------------------------------------------------
+                                         Funktionen
+  -----------------------------------------------------------------------------------------------------*/
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  getBreeders(): void{
+  getBreeders(): void {
     this.breederService.getBreeders().subscribe(breeders => {
       this.breeders = breeders;
       this.data.breeder = breeders[0];

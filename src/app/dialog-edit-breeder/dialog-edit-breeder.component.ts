@@ -10,13 +10,18 @@ import {Breeder} from "../data/breeder";
 })
 export class DialogEditBreederComponent implements OnInit {
 
-  initialDate: Date = new Date()
+  nameControl = new FormControl('', Validators.required);
+
   numberControl = new FormControl('', Validators.min(0));
 
-  constructor(public dialogRef: MatDialogRef<DialogEditBreederComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Breeder) {}
+  initialDate: Date = new Date()
 
-  ngOnInit(): void {}
+  constructor(public dialogRef: MatDialogRef<DialogEditBreederComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Breeder) {
+  }
+
+  ngOnInit(): void {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

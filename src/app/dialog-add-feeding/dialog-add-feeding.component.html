@@ -4,7 +4,8 @@
   <form class="add-feeding-form">
 
     <mat-form-field appearance="fill" class="add-feeding-dialog-input">
-      <input matInput [matDatepicker]="picker" [(ngModel)]="data.date" [ngModelOptions]="{standalone: true}" placeholder="{{initialDate.toLocaleDateString()}}" >
+      <input matInput [matDatepicker]="picker" [(ngModel)]="data.date" [ngModelOptions]="{standalone: true}"
+             placeholder="{{initialDate.toLocaleDateString()}}">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -19,7 +20,8 @@
     <p>
       <mat-form-field appearance="fill" class="add-feeding-dialog-input">
         <mat-label>Gewicht (g)</mat-label>
-        <input matInput type="number" name="futtergewicht" id="feeding-weight" [(ngModel)]="data.weight" [formControl]="numberControl">
+        <input matInput type="number" name="futtergewicht" id="feeding-weight" [(ngModel)]="data.weight"
+               [formControl]="numberControl">
         <span matSuffix> g</span>
         <mat-error *ngIf="numberControl.hasError('min')">
           Gültiges Gewicht eingeben
@@ -32,5 +34,7 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="numberControl.invalid" color="reptiNoteTheme">Hinzufügen</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="numberControl.invalid"
+          color="reptiNoteTheme">Hinzufügen
+  </button>
 </mat-dialog-actions>

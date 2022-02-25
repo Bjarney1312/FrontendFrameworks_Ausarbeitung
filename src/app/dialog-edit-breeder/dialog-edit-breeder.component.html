@@ -4,14 +4,14 @@
 
 <mat-dialog-content class="mat-typography">
   <form>
-      <p class="edit-breeder-dialog-p">
-          <mat-form-field appearance="fill" class="edit-breeder-dialog-input-full">
-            <mat-label>Unternehmen</mat-label>
-            <input matInput name="company" id="breeder-company" [(ngModel)]="data.companyName">
-          </mat-form-field>
-      </p>
+    <p class="edit-breeder-dialog-p">
+      <mat-form-field appearance="fill" class="edit-breeder-dialog-input-full">
+        <mat-label>Unternehmen</mat-label>
+        <input matInput name="company" id="breeder-company" [(ngModel)]="data.companyName">
+      </mat-form-field>
+    </p>
 
-    <table >
+    <table>
       <tr>
         <td>
           <mat-form-field appearance="fill" class="edit-breeder-dialog-input">
@@ -22,18 +22,18 @@
         <td>
           <mat-form-field appearance="fill" class="edit-breeder-dialog-input">
             <mat-label>Nachname</mat-label>
-            <input matInput name="lastname" id="breeder-lastname" [(ngModel)]="data.lastName">
+            <input matInput name="lastname" id="breeder-lastname" [(ngModel)]="data.lastName" [formControl]="nameControl" required>
           </mat-form-field>
         </td>
       </tr>
     </table>
 
-      <p class="edit-breeder-dialog-p">
-          <mat-form-field appearance="fill" class="edit-breeder-dialog-input-full">
-            <mat-label>Straße</mat-label>
-            <input matInput name="street" id="breeder-street" [(ngModel)]="data.street">
-          </mat-form-field>
-      </p>
+    <p class="edit-breeder-dialog-p">
+      <mat-form-field appearance="fill" class="edit-breeder-dialog-input-full">
+        <mat-label>Straße</mat-label>
+        <input matInput name="street" id="breeder-street" [(ngModel)]="data.street">
+      </mat-form-field>
+    </p>
 
     <table>
       <tr>
@@ -52,12 +52,12 @@
       </tr>
     </table>
 
-      <p class="edit-breeder-dialog-p">
-          <mat-form-field appearance="fill" class="edit-breeder-dialog-input-full">
-            <mat-label>Land</mat-label>
-            <input matInput name="country" id="breeder-country" [(ngModel)]="data.country">
-          </mat-form-field>
-      </p>
+    <p class="edit-breeder-dialog-p">
+      <mat-form-field appearance="fill" class="edit-breeder-dialog-input-full">
+        <mat-label>Land</mat-label>
+        <input matInput name="country" id="breeder-country" [(ngModel)]="data.country">
+      </mat-form-field>
+    </p>
 
     <table>
       <tr>
@@ -69,8 +69,8 @@
         </td>
         <td>
           <mat-form-field appearance="fill" class="edit-breeder-dialog-input">
-          <mat-label>Telefon</mat-label>
-          <input matInput name="phone" id="breeder-phone" [(ngModel)]="data.phone">
+            <mat-label>Telefon</mat-label>
+            <input matInput name="phone" id="breeder-phone" [(ngModel)]="data.phone">
           </mat-form-field>
         </td>
       </tr>
@@ -80,5 +80,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close (click)="onNoClick()">Abbrechen</button>
-  <button mat-button [mat-dialog-close]="data" color="reptiNoteTheme">Bearbeiten</button>
+  <button mat-button [mat-dialog-close]="data" [disabled]="nameControl.invalid" color="reptiNoteTheme">Bearbeiten</button>
 </mat-dialog-actions>

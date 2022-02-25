@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Weight} from "../data/weight";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {v4 as uuidv4} from "uuid";
 
 @Component({
@@ -11,11 +11,13 @@ import {v4 as uuidv4} from "uuid";
 })
 export class DialogAddWeightComponent implements OnInit {
 
-  initialDate: Date = new Date()
   numberControl = new FormControl('', Validators.min(0));
 
+  initialDate: Date = new Date();
+
   constructor(public dialogRef: MatDialogRef<DialogAddWeightComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Weight) {}
+              @Inject(MAT_DIALOG_DATA) public data: Weight) {
+  }
 
   ngOnInit(): void {
     this.data.id = uuidv4();

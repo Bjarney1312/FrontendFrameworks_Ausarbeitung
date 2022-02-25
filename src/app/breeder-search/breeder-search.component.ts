@@ -43,13 +43,35 @@ export class BreederSearchComponent implements OnInit {
       });
   }
 
+  updateBreederLocalStorage():void{
+    this.breederService.getBreeders().subscribe(breeders =>{
+      localStorage.setItem('breeders', JSON.stringify(breeders));
+      console.log(this.breeder.id)
+      this.reptileService.getReptiles()
+        .subscribe(reptiles =>{
+
+          for(let i = 0; i<reptiles.length; i++){
+            if(reptiles[i].breeder.id === this.breeder.id){
+
+              reptiles[i].breeder = this.breeder;
+              this.reptileService.updateReptile(reptiles[i]).subscribe()
+              this.reptileService.getReptiles().subscribe(reptiles =>{
+                localStorage.setItem('reptiles', JSON.stringify(reptiles))
+                location.reload();
+              });
+            }
+          }
+        })
+    });
+  }
+
   openEditBreederDialog(id: string): void {
     this.breederService.getBreeder(id)
       .subscribe(breeder => {
         this.breeder = breeder;
 
         const dialogRef = this.dialog.open(DialogEditBreederComponent, {
-          width: '300px',
+          width: '560px',
           data: {
             companyName: this.breeder.companyName,
             firstName: this.breeder.firstName,
@@ -73,18 +95,9 @@ export class BreederSearchComponent implements OnInit {
             this.breeder.place = result.place;
             this.breeder.email = result.email;
             this.breeder.phone = result.phone;
-            this.breederService.updateBreeder(this.breeder).subscribe(event => {
-              this.reptileService.getReptiles()
-                .subscribe(reptiles =>{
-                  for(let i = 0; i<reptiles.length; i++){
-                    if(reptiles[i].breeder.id === this.breeder.id){
-                      reptiles[i].breeder = this.breeder;
-                      this.reptileService.updateReptile(reptiles[i]).subscribe()
-                    }
-                  }
-                })
-            });
+            this.breederService.updateBreeder(this.breeder).subscribe()
             this.getBreedersWithoutUnbekannt();
+            this.updateBreederLocalStorage();
           }
         });
       });

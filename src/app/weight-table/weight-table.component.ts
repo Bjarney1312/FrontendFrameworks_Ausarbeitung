@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Reptile} from "../data/reptile";
 import {MatTable, MatTableDataSource} from "@angular/material/table";
 import {SelectionModel} from "@angular/cdk/collections";
@@ -7,17 +7,19 @@ import {MatDialog} from "@angular/material/dialog";
 import {ReptileService} from "../reptile.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {DialogAddWeightComponent} from "../dialog-add-weight/dialog-add-weight.component";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-weight-table',
   templateUrl: './weight-table.component.html',
   styleUrls: ['./weight-table.component.css']
 })
-export class WeightTableComponent implements OnInit {
+export class WeightTableComponent implements OnInit, AfterViewInit {
 
   @Input() reptile!: Reptile;
   @ViewChild('myTable') myTable!: MatTable<Weight>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   displayedColumns: any[] = ['select', 'date', 'weight'];
   dataSource!:MatTableDataSource<Weight>
   selection = new SelectionModel<Weight>(true, []);
@@ -28,6 +30,19 @@ export class WeightTableComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Weight>(this.reptile.weight);
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   updateReptileStorage():void{

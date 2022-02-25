@@ -65,7 +65,6 @@
           <mat-form-field appearance="fill" class="add-reptile-dialog-input">
             <mat-label>Züchter</mat-label>
             <mat-select [(ngModel)]="data.breeder" [ngModelOptions]="{standalone: true}">
-              <mat-option>--</mat-option>
               <mat-option *ngFor="let breeder of breeders" [value]="breeder">
                 {{breeder.firstName}} {{breeder.lastName}}
               </mat-option>

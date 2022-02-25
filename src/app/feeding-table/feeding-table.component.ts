@@ -1,4 +1,4 @@
-import {Component, ViewChild, OnInit, Input} from '@angular/core';
+import {Component, ViewChild, OnInit, Input, AfterViewInit} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {Feeding} from "../data/feeding";
@@ -7,18 +7,19 @@ import {ReptileService} from "../reptile.service";
 import {DialogAddFeedingComponent} from "../dialog-add-feeding/dialog-add-feeding.component";
 import {MatDialog} from "@angular/material/dialog";
 import {SelectionModel} from "@angular/cdk/collections";
-
+import {MatSort, MatSortable} from "@angular/material/sort";
 
 @Component({
   selector: 'app-feeding-table',
   templateUrl: './feeding-table.component.html',
   styleUrls: ['./feeding-table.component.css']
 })
-export class FeedingTableComponent implements OnInit {
+export class FeedingTableComponent implements OnInit, AfterViewInit {
 
   @Input() reptile!: Reptile;
   @ViewChild('myTable') myTable!: MatTable<Feeding>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   displayedColumns: any[] = ['select', 'date', 'type', 'weight'];
   dataSource!:MatTableDataSource<Feeding>
   selection = new SelectionModel<Feeding>(true, []);
@@ -29,6 +30,19 @@ export class FeedingTableComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Feeding>(this.reptile.feedings);
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   updateReptileStorage():void{

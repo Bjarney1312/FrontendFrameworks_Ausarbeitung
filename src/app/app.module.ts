@@ -28,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import {MatSortModule} from "@angular/material/sort";
 
 import { ReptileDashboardComponent } from './reptile-dashboard/reptile-dashboard.component';
 import { ReptileDetailsComponent } from './reptile-details/reptile-details.component';
@@ -46,6 +47,7 @@ import { DialogAddBreederComponent } from './dialog-add-breeder/dialog-add-breed
 import { DialogEditBreederComponent } from './dialog-edit-breeder/dialog-edit-breeder.component';
 import { DialogDeleteBreederComponent } from './dialog-delete-breeder/dialog-delete-breeder.component';
 import { BreederSearchComponent } from './breeder-search/breeder-search.component';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +95,8 @@ import { BreederSearchComponent } from './breeder-search/breeder-search.componen
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSortModule
   ],
   providers: [
     { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }, DatePipe

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Reptile} from "../data/reptile";
 import {MatTable, MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -7,17 +7,19 @@ import {MatDialog} from "@angular/material/dialog";
 import {ReptileService} from "../reptile.service";
 import {Note} from "../data/note";
 import {DialogAddNoteComponent} from "../dialog-add-note/dialog-add-note.component";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-note-table',
   templateUrl: './note-table.component.html',
   styleUrls: ['./note-table.component.css']
 })
-export class NoteTableComponent implements OnInit {
+export class NoteTableComponent implements OnInit, AfterViewInit {
 
   @Input() reptile!: Reptile;
   @ViewChild('myTable') myTable!: MatTable<Note>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   displayedColumns: any[] = ['select', 'date', 'note'];
   dataSource!:MatTableDataSource<Note>
   selection = new SelectionModel<Note>(true, []);
@@ -28,6 +30,19 @@ export class NoteTableComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Note>(this.reptile.notes);
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   updateReptileStorage():void{

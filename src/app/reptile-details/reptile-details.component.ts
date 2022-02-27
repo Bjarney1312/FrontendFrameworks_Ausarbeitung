@@ -52,10 +52,10 @@ export class ReptileDetailsComponent implements OnInit {
       width: '560px',
       data: {
         name: this.reptile?.name,
-        geburtsdatum: this.reptile?.geburtsdatum,
-        geschlecht: this.reptile?.geschlecht,
-        ordnung: this.reptile?.ordnung,
-        art: this.reptile?.art,
+        birthday: this.reptile?.birthday,
+        gender: this.reptile?.gender,
+        species: this.reptile?.species,
+        type: this.reptile?.type,
         morph: this.reptile?.morph,
         breeder: this.reptile?.breeder,
         imageURL: this.reptile?.imageURL
@@ -65,10 +65,10 @@ export class ReptileDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined && this.reptile !== undefined) {
         this.reptile.name = result.name;
-        this.reptile.geburtsdatum = result.geburtsdatum;
-        this.reptile.geschlecht = result.geschlecht;
-        this.reptile.ordnung = result.ordnung;
-        this.reptile.art = result.art;
+        this.reptile.birthday = result.birthday;
+        this.reptile.gender = result.gender;
+        this.reptile.species = result.species;
+        this.reptile.type = result.type;
         this.reptile.morph = result.morph;
         this.reptile.breeder = result.breeder;
         this.reptile.imageURL = result.imageURL;

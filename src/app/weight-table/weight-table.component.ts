@@ -71,6 +71,7 @@ export class WeightTableComponent implements OnInit, AfterViewInit {
             this.reptile.weight.push(result);
             this.updateReptileStorage();
             this.myTable.renderRows();
+            this.dataSource._updateChangeSubscription();
           })
       }
     });
@@ -87,6 +88,7 @@ export class WeightTableComponent implements OnInit, AfterViewInit {
               this.reptileService.updateReptile(reptile).subscribe();
               this.updateReptileStorage();
               this.myTable.renderRows();
+              this.dataSource._updateChangeSubscription();
             })
         }
       }

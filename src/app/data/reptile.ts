@@ -6,10 +6,10 @@ import {Breeder} from "./breeder";
 export interface Reptile {
   id: string;
   name: string;
-  geburtsdatum: string;
-  geschlecht: string;
-  ordnung: string;
-  art: string;
+  birthday: string;
+  gender: string;
+  species: string;
+  type: string;
   morph: string;
   feedings: Feeding[];
   weight: Weight[];

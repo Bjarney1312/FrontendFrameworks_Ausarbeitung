@@ -44,7 +44,7 @@ export class DialogAddReptileComponent implements OnInit {
   ngOnInit(): void {
     this.getBreeders();
     this.data.id = uuidv4();
-    this.data.geschlecht = 'Unbekannt';
+    this.data.gender = 'Unbekannt';
   }
 
   /*---------------------------------------------------------------------------------------------------

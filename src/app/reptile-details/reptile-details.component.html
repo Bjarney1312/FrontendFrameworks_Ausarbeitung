@@ -5,15 +5,15 @@
       <mat-card-header>
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{reptile.name}}</mat-card-title>
-        <mat-card-subtitle>{{reptile.ordnung}} | {{reptile.art}}</mat-card-subtitle>
+        <mat-card-subtitle>{{reptile.species}} | {{reptile.type}}</mat-card-subtitle>
       </mat-card-header>
 
       <img mat-card-image src="{{reptile.imageURL}}" alt="Place for a picture of your beautiful Animal :)">
 
       <mat-card-content>
         <section id="card-content-left">
-          <p><span class="card-content-subpoints">Geburtsdatum:</span> {{reptile.geburtsdatum}}</p>
-          <p><span class="card-content-subpoints">Geschlecht:</span> {{reptile.geschlecht}}</p>
+          <p><span class="card-content-subpoints">Geburtsdatum:</span> {{reptile.birthday}}</p>
+          <p><span class="card-content-subpoints">Geschlecht:</span> {{reptile.gender}}</p>
           <p><span class="card-content-subpoints">Morph:</span> {{reptile.morph}}</p>
         </section>
 

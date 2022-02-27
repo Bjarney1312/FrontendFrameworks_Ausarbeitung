@@ -71,6 +71,7 @@ export class NoteTableComponent implements OnInit, AfterViewInit {
             this.reptile.notes.push(result);
             this.updateReptileStorage();
             this.myTable.renderRows();
+            this.dataSource._updateChangeSubscription();
           })
       }
     });
@@ -85,8 +86,9 @@ export class NoteTableComponent implements OnInit, AfterViewInit {
             .subscribe(reptile => {
               reptile.notes = this.dataSource.data;
               this.reptileService.updateReptile(reptile).subscribe();
-              this.updateReptileStorage()
-              this.myTable.renderRows()
+              this.updateReptileStorage();
+              this.myTable.renderRows();
+              this.dataSource._updateChangeSubscription();
             })
         }
       }

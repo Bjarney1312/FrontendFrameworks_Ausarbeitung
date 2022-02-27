@@ -15,7 +15,7 @@
 
       <mat-card-title-group>
         <mat-card-title>{{reptile.name}}</mat-card-title>
-        <mat-card-subtitle>{{reptile.ordnung}} | {{reptile.art}}</mat-card-subtitle>
+        <mat-card-subtitle>{{reptile.species}} | {{reptile.type}}</mat-card-subtitle>
         <img mat-card-md-image src="{{reptile.imageURL}}" alt="Photo of your animal">
       </mat-card-title-group>
 
@@ -23,11 +23,11 @@
         <table>
           <tr>
             <td class="table-row-first">Geburtsdatum:</td>
-            <td>{{reptile.geburtsdatum}}</td>
+            <td>{{reptile.birthday}}</td>
           </tr>
           <tr>
             <td class="table-row-first">Geschlecht:</td>
-            <td>{{reptile.geschlecht}}</td>
+            <td>{{reptile.gender}}</td>
           </tr>
           <tr>
             <td class="table-row-first">Morph:</td>

@@ -39,6 +39,7 @@ export class FeedingTableComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
+
   /*---------------------------------------------------------------------------------------------------
                                           Funktionen
   -----------------------------------------------------------------------------------------------------*/
@@ -83,6 +84,7 @@ export class FeedingTableComponent implements OnInit, AfterViewInit {
             this.reptileService.updateReptile(reptile).subscribe();
             this.updateReptileStorage();
             this.myTable.renderRows();
+            this.dataSource._updateChangeSubscription();
           })
       }
     });
@@ -98,7 +100,8 @@ export class FeedingTableComponent implements OnInit, AfterViewInit {
               reptile.feedings = this.dataSource.data
               this.reptileService.updateReptile(reptile).subscribe();
               this.updateReptileStorage();
-              this.myTable.renderRows()
+              this.myTable.renderRows();
+              this.dataSource._updateChangeSubscription();
             })
         }
       }
@@ -115,6 +118,7 @@ export class FeedingTableComponent implements OnInit, AfterViewInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+
     }
   }
 

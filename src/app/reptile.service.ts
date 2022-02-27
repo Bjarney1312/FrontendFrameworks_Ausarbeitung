@@ -43,7 +43,6 @@ export class ReptileService {
 
   /** POST - Request: Fügt dem Server einen neues Tier hinzu */
   addReptile(reptile: Reptile): Observable<Reptile> {
-    console.log('TEST: Add Reptile wird ausgeführt' + reptile.name);
     return this.http.post<Reptile>(this.reptileUrl, reptile, this.httpOptions).pipe(
       catchError(this.handleError<Reptile>('addReptile'))
     );

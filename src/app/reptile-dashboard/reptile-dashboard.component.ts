@@ -82,6 +82,7 @@ export class ReptileDashboardComponent implements OnInit {
       width: '300px',
       data: {feeding: {}}, disableClose: true
     });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if (result.date === undefined) {
@@ -97,9 +98,11 @@ export class ReptileDashboardComponent implements OnInit {
         }
         this.reptileService.getReptile(reptileid)
           .subscribe(reptile => {
-            reptile.feedings.push(Object.assign({}, result))
+            this.reptile = reptile;
+            reptile.feedings.push(Object.assign({}, result));
             this.reptileService.updateReptile(reptile).subscribe();
             this.updateReptileStorage();
+            this.getReptiles();
           })
       }
     });
@@ -125,6 +128,7 @@ export class ReptileDashboardComponent implements OnInit {
             reptile.weight.push(Object.assign({}, result));
             this.reptileService.updateReptile(reptile).subscribe();
             this.updateReptileStorage();
+            this.getReptiles();
           })
       }
     });
@@ -150,6 +154,7 @@ export class ReptileDashboardComponent implements OnInit {
             reptile.notes.push(Object.assign({}, result));
             this.reptileService.updateReptile(reptile).subscribe();
             this.updateReptileStorage();
+            this.getReptiles();
           })
       }
     });
